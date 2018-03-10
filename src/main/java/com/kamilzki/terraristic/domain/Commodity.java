@@ -1,19 +1,33 @@
 package com.kamilzki.terraristic.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-//@Entity
-public abstract class Commodity
+@Entity
+@Table(name = "commodity")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@MappedSuperclass
+public class Commodity
 {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+
+//    @Column(name = "name_of_commodity")
     private String name;
+
     private String description;
     private Double price;
+
+    public Commodity()
+    {
+    }
+
+    public Commodity(String name, String description, Double price)
+    {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
 
     public Long getId()
     {

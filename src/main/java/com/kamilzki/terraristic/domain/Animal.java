@@ -6,12 +6,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Animal //extends Commodity
+//@Table(name = "animals")
+public class Animal extends Commodity
 {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
     private int minTemperature;
     private int maxTemperature;
 
@@ -22,6 +23,15 @@ public class Animal //extends Commodity
     private CategoryOfAnimal categoryOfAnimal;
 
     public Animal(){}
+
+    public Animal(String name, String description, Double price, int minTemperature, int maxTemperature, Set<TypeOfFood> typeOfFoods, CategoryOfAnimal categoryOfAnimal)
+    {
+        super(name, description, price);
+        this.minTemperature = minTemperature;
+        this.maxTemperature = maxTemperature;
+        this.typeOfFoods = typeOfFoods;
+        this.categoryOfAnimal = categoryOfAnimal;
+    }
 
     public Animal(int minTemperature, int maxTemperature, Set<TypeOfFood> typeOfFoods, CategoryOfAnimal categoryOfAnimal)
     {
@@ -37,15 +47,15 @@ public class Animal //extends Commodity
         this.maxTemperature = maxTemperature;
     }
 
-    public Long getId()
-    {
-        return id;
-    }
-
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
+//    public Long getId()
+//    {
+//        return id;
+//    }
+//
+//    public void setId(Long id)
+//    {
+//        this.id = id;
+//    }
 
     public int getMinTemperature()
     {

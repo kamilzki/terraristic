@@ -6,11 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Object //extends Commodity
+public class Object extends Commodity
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long Id;
     private String brand;
 
     public Object()
@@ -22,15 +22,21 @@ public class Object //extends Commodity
         this.brand = brand;
     }
 
-    public Long getId()
+    public Object(String name, String description, Double price, String brand)
     {
-        return Id;
+        super(name, description, price);
+        this.brand = brand;
     }
 
-    public void setId(Long id)
-    {
-        Id = id;
-    }
+//    public Long getId()
+//    {
+//        return Id;
+//    }
+//
+//    public void setId(Long id)
+//    {
+//        Id = id;
+//    }
 
     public String getBrand()
     {
