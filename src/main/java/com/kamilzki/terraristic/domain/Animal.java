@@ -10,9 +10,10 @@ public class Animal //extends Commodity
 {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private int minTemperature, maxTemperature;
+    private int minTemperature;
+    private int maxTemperature;
 
     @OneToMany
     private Set<TypeOfFood> typeOfFoods = new HashSet<>();
@@ -28,6 +29,12 @@ public class Animal //extends Commodity
         this.maxTemperature = maxTemperature;
         this.typeOfFoods = typeOfFoods;
         this.categoryOfAnimal = categoryOfAnimal;
+    }
+
+    public Animal(int minTemperature, int maxTemperature)
+    {
+        this.minTemperature = minTemperature;
+        this.maxTemperature = maxTemperature;
     }
 
     public Long getId()

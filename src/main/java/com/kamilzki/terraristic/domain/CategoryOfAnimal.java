@@ -14,16 +14,16 @@ public class CategoryOfAnimal
     private String name;
 
     @OneToMany
-    private Animal animal;
+    private Set<Animal> animals;
 
     public CategoryOfAnimal()
     {
     }
 
-    public CategoryOfAnimal(String name, Animal animal)
+    public CategoryOfAnimal(String name, Set<Animal> animals)
     {
         this.name = name;
-        this.animal = animal;
+        this.animals = animals;
     }
 
     public Long getId()
@@ -46,13 +46,13 @@ public class CategoryOfAnimal
         this.name = name;
     }
 
-    public Animal getAnimal()
+    public Set<Animal> getAnimals()
     {
-        return animal;
+        return animals;
     }
 
-    public void setAnimal(Animal animal)
+    public void setAnimals(Set<Animal> animals)
     {
-        this.animal = animal;
+        this.animals = animals;
     }
 }
