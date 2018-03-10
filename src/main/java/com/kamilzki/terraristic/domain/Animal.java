@@ -16,28 +16,39 @@ public class Animal extends Commodity
     private int minTemperature;
     private int maxTemperature;
 
-    @OneToMany
-    private Set<TypeOfFood> typeOfFoods = new HashSet<>();
+    @ManyToMany
+    @JoinTable(name = "animal_food",
+            joinColumns = @JoinColumn(name = "animal_id"),
+            inverseJoinColumns = @JoinColumn(name = "type_of_food_id"))
+    private Set<TypeOfFood> foods = new HashSet<>();
 
     @ManyToOne
     private CategoryOfAnimal categoryOfAnimal;
 
     public Animal(){}
 
-    public Animal(String name, String description, Double price, int minTemperature, int maxTemperature, Set<TypeOfFood> typeOfFoods, CategoryOfAnimal categoryOfAnimal)
+    public Animal(String name, String description, Double price, int minTemperature, int maxTemperature, Set<TypeOfFood> foods, CategoryOfAnimal categoryOfAnimal)
     {
         super(name, description, price);
         this.minTemperature = minTemperature;
         this.maxTemperature = maxTemperature;
-        this.typeOfFoods = typeOfFoods;
+        this.foods = foods;
         this.categoryOfAnimal = categoryOfAnimal;
     }
 
-    public Animal(int minTemperature, int maxTemperature, Set<TypeOfFood> typeOfFoods, CategoryOfAnimal categoryOfAnimal)
+    public Animal(String name, String description, Double price, int minTemperature, int maxTemperature, CategoryOfAnimal categoryOfAnimal)
+    {
+        super(name, description, price);
+        this.minTemperature = minTemperature;
+        this.maxTemperature = maxTemperature;
+        this.categoryOfAnimal = categoryOfAnimal;
+    }
+
+    public Animal(int minTemperature, int maxTemperature, Set<TypeOfFood> foods, CategoryOfAnimal categoryOfAnimal)
     {
         this.minTemperature = minTemperature;
         this.maxTemperature = maxTemperature;
-        this.typeOfFoods = typeOfFoods;
+        this.foods = foods;
         this.categoryOfAnimal = categoryOfAnimal;
     }
 
@@ -77,14 +88,14 @@ public class Animal extends Commodity
         this.maxTemperature = maxTemperature;
     }
 
-    public Set<TypeOfFood> getTypeOfFoods()
+    public Set<TypeOfFood> getFoods()
     {
-        return typeOfFoods;
+        return foods;
     }
 
-    public void setTypeOfFoods(Set<TypeOfFood> typeOfFoods)
+    public void setFoods(Set<TypeOfFood> foods)
     {
-        this.typeOfFoods = typeOfFoods;
+        this.foods = foods;
     }
 
     public CategoryOfAnimal getCategoryOfAnimal()

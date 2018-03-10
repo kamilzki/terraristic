@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "commodity")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.JOINED)
 //@MappedSuperclass
 public class Commodity
 {
@@ -15,6 +15,7 @@ public class Commodity
 //    @Column(name = "name_of_commodity")
     private String name;
 
+    @Lob
     private String description;
     private Double price;
 

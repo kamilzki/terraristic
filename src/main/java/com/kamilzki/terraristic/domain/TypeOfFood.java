@@ -1,6 +1,7 @@
 package com.kamilzki.terraristic.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class TypeOfFood
@@ -9,21 +10,21 @@ public class TypeOfFood
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    private String name;
+    private String nameFood;
     private boolean alive;
 
-    @ManyToOne
-    private Animal animal;
+    @ManyToMany(mappedBy = "foods")
+    private Set<Animal> animals;
 
     public TypeOfFood()
     {
     }
 
-    public TypeOfFood(String name, boolean alive, Animal animal)
+    public TypeOfFood(String nameFood, boolean alive, Set<Animal> animals)
     {
-        this.name = name;
+        this.nameFood = nameFood;
         this.alive = alive;
-        this.animal = animal;
+        this.animals = animals;
     }
 
     public Long getId()
@@ -36,14 +37,14 @@ public class TypeOfFood
         Id = id;
     }
 
-    public String getName()
+    public String getNameFood()
     {
-        return name;
+        return nameFood;
     }
 
-    public void setName(String name)
+    public void setNameFood(String nameFood)
     {
-        this.name = name;
+        this.nameFood = nameFood;
     }
 
     public boolean isAlive()
@@ -56,13 +57,13 @@ public class TypeOfFood
         this.alive = alive;
     }
 
-    public Animal getAnimal()
+    public Set<Animal> getAnimals()
     {
-        return animal;
+        return animals;
     }
 
-    public void setAnimal(Animal animal)
+    public void setAnimals(Set<Animal> animals)
     {
-        this.animal = animal;
+        this.animals = animals;
     }
 }

@@ -1,7 +1,6 @@
 package com.kamilzki.terraristic.domain;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -11,18 +10,19 @@ public class CategoryOfAnimal
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    private String name;
+    @Column(name = "name_category")
+    private String nameCategory;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryOfAnimal")
     private Set<Animal> animals;
 
     public CategoryOfAnimal()
     {
     }
 
-    public CategoryOfAnimal(String name, Set<Animal> animals)
+    public CategoryOfAnimal(String nameCategory, Set<Animal> animals)
     {
-        this.name = name;
+        this.nameCategory = nameCategory;
         this.animals = animals;
     }
 
@@ -36,14 +36,14 @@ public class CategoryOfAnimal
         Id = id;
     }
 
-    public String getName()
+    public String getNameCategory()
     {
-        return name;
+        return nameCategory;
     }
 
-    public void setName(String name)
+    public void setNameCategory(String nameCategory)
     {
-        this.name = name;
+        this.nameCategory = nameCategory;
     }
 
     public Set<Animal> getAnimals()

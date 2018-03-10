@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>terraristic</name>
+	<nameCategory>terraristic</nameCategory>
 	<description>Terraristic</description>
 
 	<parent>
@@ -72,7 +72,7 @@
 	<repositories>
 		<repository>
 			<id>spring-snapshots</id>
-			<name>Spring Snapshots</name>
+			<nameCategory>Spring Snapshots</nameCategory>
 			<url>https://repo.spring.io/snapshot</url>
 			<snapshots>
 				<enabled>true</enabled>
@@ -80,7 +80,7 @@
 		</repository>
 		<repository>
 			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
+			<nameCategory>Spring Milestones</nameCategory>
 			<url>https://repo.spring.io/milestone</url>
 			<snapshots>
 				<enabled>false</enabled>
@@ -91,7 +91,7 @@
 	<pluginRepositories>
 		<pluginRepository>
 			<id>spring-snapshots</id>
-			<name>Spring Snapshots</name>
+			<nameCategory>Spring Snapshots</nameCategory>
 			<url>https://repo.spring.io/snapshot</url>
 			<snapshots>
 				<enabled>true</enabled>
@@ -99,7 +99,7 @@
 		</pluginRepository>
 		<pluginRepository>
 			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
+			<nameCategory>Spring Milestones</nameCategory>
 			<url>https://repo.spring.io/milestone</url>
 			<snapshots>
 				<enabled>false</enabled>

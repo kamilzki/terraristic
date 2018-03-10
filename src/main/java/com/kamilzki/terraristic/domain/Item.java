@@ -6,23 +6,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Object extends Commodity
+public class Item extends Commodity
 {
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private Long Id;
     private String brand;
 
-    public Object()
+    public Item()
     {
     }
 
-    public Object(String brand)
+    public Item(String brand)
     {
         this.brand = brand;
     }
 
-    public Object(String name, String description, Double price, String brand)
+    public Item(String name, String description, Double price, String brand)
     {
         super(name, description, price);
         this.brand = brand;

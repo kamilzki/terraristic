@@ -10,11 +10,13 @@
 <table>
     <tr>
         <th>ID</th>
-        <th>Name</th>
+        <th>MinTemp</th>
+        <th>MaxTemp</th>
     </tr>
     <tr th:each="animal : ${animals}">
         <td th:text="${animal.id}">1223</td>
-        <td th:text="${animal.name}">Spider</td>
+        <td th:text="${animal.minTemperature}">20</td>
+        <td th:text="${animal.maxTemperature}">27</td>
     </tr>
 </table>
 </body>
