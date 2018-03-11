@@ -1,10 +1,14 @@
 package com.kamilzki.terraristic.domain;
 
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Data
+@EqualsAndHashCode(exclude = "foods")
 @Entity
 //@Table(name = "animals")
 public class Animal extends Commodity
@@ -44,67 +48,4 @@ public class Animal extends Commodity
         this.categoryOfAnimal = categoryOfAnimal;
     }
 
-    public Animal(int minTemperature, int maxTemperature, Set<TypeOfFood> foods, CategoryOfAnimal categoryOfAnimal)
-    {
-        this.minTemperature = minTemperature;
-        this.maxTemperature = maxTemperature;
-        this.foods = foods;
-        this.categoryOfAnimal = categoryOfAnimal;
-    }
-
-    public Animal(int minTemperature, int maxTemperature)
-    {
-        this.minTemperature = minTemperature;
-        this.maxTemperature = maxTemperature;
-    }
-
-//    public Long getId()
-//    {
-//        return id;
-//    }
-//
-//    public void setId(Long id)
-//    {
-//        this.id = id;
-//    }
-
-    public int getMinTemperature()
-    {
-        return minTemperature;
-    }
-
-    public void setMinTemperature(int minTemperature)
-    {
-        this.minTemperature = minTemperature;
-    }
-
-    public int getMaxTemperature()
-    {
-        return maxTemperature;
-    }
-
-    public void setMaxTemperature(int maxTemperature)
-    {
-        this.maxTemperature = maxTemperature;
-    }
-
-    public Set<TypeOfFood> getFoods()
-    {
-        return foods;
-    }
-
-    public void setFoods(Set<TypeOfFood> foods)
-    {
-        this.foods = foods;
-    }
-
-    public CategoryOfAnimal getCategoryOfAnimal()
-    {
-        return categoryOfAnimal;
-    }
-
-    public void setCategoryOfAnimal(CategoryOfAnimal categoryOfAnimal)
-    {
-        this.categoryOfAnimal = categoryOfAnimal;
-    }
 }

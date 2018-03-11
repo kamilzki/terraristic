@@ -1,10 +1,13 @@
 package com.kamilzki.terraristic.domain;
 
+import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Data
 @Entity
 public class Item extends Commodity
 {
@@ -13,9 +16,6 @@ public class Item extends Commodity
 //    private Long Id;
     private String brand;
 
-    public Item()
-    {
-    }
 
     public Item(String brand)
     {
@@ -28,23 +28,4 @@ public class Item extends Commodity
         this.brand = brand;
     }
 
-//    public Long getId()
-//    {
-//        return Id;
-//    }
-//
-//    public void setId(Long id)
-//    {
-//        Id = id;
-//    }
-
-    public String getBrand()
-    {
-        return brand;
-    }
-
-    public void setBrand(String brand)
-    {
-        this.brand = brand;
-    }
 }

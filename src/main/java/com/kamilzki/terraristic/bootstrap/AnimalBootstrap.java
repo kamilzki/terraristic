@@ -7,13 +7,16 @@ import com.kamilzki.terraristic.repositories.AnimalRepository;
 import com.kamilzki.terraristic.repositories.CategoryOfAnimalRepository;
 import com.kamilzki.terraristic.repositories.TypeOfFoodRepository;
 import com.sun.deploy.security.ValidationState;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Type;
 import java.util.*;
 
+@Slf4j
 @Component
 public class AnimalBootstrap implements ApplicationListener<ContextRefreshedEvent>
 {
@@ -30,9 +33,11 @@ public class AnimalBootstrap implements ApplicationListener<ContextRefreshedEven
     }
 
     @Override
+    @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent)
     {
         animalRepository.saveAll(getAnimals());
+        log.debug("Loading animal bootstrap data.");
     }
 
     private List<Animal> getAnimals() {

@@ -1,7 +1,10 @@
 package com.kamilzki.terraristic.domain;
 
+import lombok.*;
+
 import javax.persistence.*;
 
+@Data
 @Entity
 @Table(name = "commodity")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -40,33 +43,4 @@ public class Commodity
         Id = id;
     }
 
-    public String getName()
-    {
-        return name;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
-    public String getDescription()
-    {
-        return description;
-    }
-
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
-
-    public Double getPrice()
-    {
-        return price;
-    }
-
-    public void setPrice(Double price)
-    {
-        this.price = price;
-    }
 }

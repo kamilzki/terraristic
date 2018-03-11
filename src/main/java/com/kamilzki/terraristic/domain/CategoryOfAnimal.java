@@ -1,8 +1,12 @@
 package com.kamilzki.terraristic.domain;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.Set;
 
+@Data
+@EqualsAndHashCode(exclude = "animals")
 @Entity
 public class CategoryOfAnimal
 {
@@ -36,23 +40,4 @@ public class CategoryOfAnimal
         Id = id;
     }
 
-    public String getNameCategory()
-    {
-        return nameCategory;
-    }
-
-    public void setNameCategory(String nameCategory)
-    {
-        this.nameCategory = nameCategory;
-    }
-
-    public Set<Animal> getAnimals()
-    {
-        return animals;
-    }
-
-    public void setAnimals(Set<Animal> animals)
-    {
-        this.animals = animals;
-    }
 }

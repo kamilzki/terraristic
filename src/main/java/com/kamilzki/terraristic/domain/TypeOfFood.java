@@ -1,8 +1,13 @@
 package com.kamilzki.terraristic.domain;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 import java.util.Set;
 
+@Data
+@EqualsAndHashCode(exclude = "animals")
 @Entity
 public class TypeOfFood
 {
@@ -16,54 +21,12 @@ public class TypeOfFood
     @ManyToMany(mappedBy = "foods")
     private Set<Animal> animals;
 
-    public TypeOfFood()
-    {
-    }
+    public TypeOfFood() {}
 
     public TypeOfFood(String nameFood, boolean alive, Set<Animal> animals)
     {
         this.nameFood = nameFood;
         this.alive = alive;
-        this.animals = animals;
-    }
-
-    public Long getId()
-    {
-        return Id;
-    }
-
-    public void setId(Long id)
-    {
-        Id = id;
-    }
-
-    public String getNameFood()
-    {
-        return nameFood;
-    }
-
-    public void setNameFood(String nameFood)
-    {
-        this.nameFood = nameFood;
-    }
-
-    public boolean isAlive()
-    {
-        return alive;
-    }
-
-    public void setAlive(boolean alive)
-    {
-        this.alive = alive;
-    }
-
-    public Set<Animal> getAnimals()
-    {
-        return animals;
-    }
-
-    public void setAnimals(Set<Animal> animals)
-    {
         this.animals = animals;
     }
 }
