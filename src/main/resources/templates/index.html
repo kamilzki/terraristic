@@ -3,21 +3,54 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Animals</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
 
-<h1>Animals list</h1>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>MinTemp</th>
-        <th>MaxTemp</th>
-    </tr>
-    <tr th:each="animal : ${animals}">
-        <td th:text="${animal.id}">1223</td>
-        <td th:text="${animal.minTemperature}">20</td>
-        <td th:text="${animal.maxTemperature}">27</td>
-    </tr>
-</table>
+<div class="container-fluid" style="margin-top: 25px">
+    <div class="row">
+        <div class="col-md-5 col-md-offset-3">
+            <div class="panel panel-primary">
+
+                <div class="panel-heading">
+                    <h1 class="panel-title">Animals</h1>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive" th:if="${not #lists.isEmpty(animals)}">
+                        <table class="table table-hover ">
+                            <thead class="thead-inverse">
+                            <tr>
+                                <th>ID</th>
+                                <th>minTemparature</th>
+                                <th>maxTemparature</th>
+                            </tr>
+                            </thead>
+                            <tr th:remove="all">
+                                <td th:text="${animal.id}">12</td>
+                                <td th:text="${animal.minTemperature}">19</td>
+                                <td th:text="${animal.maxTemperature}">28</td>
+                            </tr>
+                            <tr th:remove="all">
+                                <td th:text="${animal.id}">13</td>
+                                <td th:text="${animal.minTemperature}">23</td>
+                                <td th:text="${animal.maxTemperature}">28</td>
+                            </tr>
+                            <tr th:each="animal : ${animals}">
+                                <td th:text="${animal.id}">34</td>
+                                <td th:text="${animal.minTemperature}">21</td>
+                                <td th:text="${animal.maxTemperature}">28</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
