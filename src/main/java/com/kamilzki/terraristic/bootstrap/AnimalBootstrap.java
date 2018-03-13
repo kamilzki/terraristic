@@ -37,7 +37,7 @@ public class AnimalBootstrap implements ApplicationListener<ContextRefreshedEven
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent)
     {
         animalRepository.saveAll(getAnimals());
-        log.debug("Loading animal bootstrap data.");
+        log.debug("Loading templates.animal bootstrap data.");
     }
 
     private List<Animal> getAnimals() {

@@ -5,7 +5,11 @@
     <title>Animals</title>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -25,25 +29,23 @@
                         <table class="table table-hover ">
                             <thead class="thead-inverse">
                             <tr>
-                                <th>ID</th>
+                                <th>Name</th>
                                 <th>minTemparature</th>
                                 <th>maxTemparature</th>
+                                <th>View</th>
                             </tr>
                             </thead>
                             <tr th:remove="all">
-                                <td th:text="${animal.id}">12</td>
-                                <td th:text="${animal.minTemperature}">19</td>
-                                <td th:text="${animal.maxTemperature}">28</td>
-                            </tr>
-                            <tr th:remove="all">
-                                <td th:text="${animal.id}">13</td>
+                                <td th:text="${animal.name}">13</td>
                                 <td th:text="${animal.minTemperature}">23</td>
                                 <td th:text="${animal.maxTemperature}">28</td>
+                                <td><a href="#">View</a></td>
                             </tr>
                             <tr th:each="animal : ${animals}">
-                                <td th:text="${animal.id}">34</td>
+                                <td th:text="${animal.name}">34</td>
                                 <td th:text="${animal.minTemperature}">21</td>
-                                <td th:text="${animal.maxTemperature}">28</td>
+                                <td th:text="${animal.maxTemperature}">25</td>
+                                <td><a href="#" th:href="@{'/animal/show/' + ${animal.id}}">View</a></td>
                             </tr>
                         </table>
                     </div>

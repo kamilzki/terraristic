@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Slf4j
@@ -26,5 +27,18 @@ public class AnimalServiceImpl implements AnimalService{
         Set<Animal> animalSet = new HashSet<>();
         animalRepository.findAll().iterator().forEachRemaining(animalSet::add);
         return animalSet;
+    }
+
+    @Override
+    public Animal findById(Long id)
+    {
+        Optional<Animal> animalOptional = animalRepository.findById(id);
+
+        if (!animalOptional.isPresent())
+        {
+            throw new RuntimeException("Animal Not Found!");
+        }
+
+        return animalOptional.get();
     }
 }

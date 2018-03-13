@@ -9,4 +9,6 @@ import java.util.Set;
 public interface AnimalService
 {
     Set<Animal> getAnimals();
+
+    Animal findById(Long id);
 }
