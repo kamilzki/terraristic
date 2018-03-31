@@ -15,7 +15,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
-
+<!--/*@thymesVar id="animal" type="com.kamilzki.terraristic.domain.Animal"*/-->
 <div class="container-fluid" style="margin-top: 25px">
     <div class="row">
         <div class="col-md-5 col-md-offset-3">
@@ -30,22 +30,19 @@
                             <thead class="thead-inverse">
                             <tr>
                                 <th>Name</th>
-                                <th>minTemparature</th>
-                                <th>maxTemparature</th>
+                                <th>cena</th>
                                 <th>View</th>
                             </tr>
                             </thead>
                             <tr th:remove="all">
-                                <td th:text="${animal.name}">13</td>
-                                <td th:text="${animal.minTemperature}">23</td>
-                                <td th:text="${animal.maxTemperature}">28</td>
+                                <td>Pogona vitticeps</td>
+                                <td>230 zł</td>
                                 <td><a href="#">View</a></td>
                             </tr>
                             <tr th:each="animal : ${animals}">
-                                <td th:text="${animal.name}">34</td>
-                                <td th:text="${animal.minTemperature}">21</td>
-                                <td th:text="${animal.maxTemperature}">25</td>
-                                <td><a href="#" th:href="@{'/animal/show/' + ${animal.id}}">View</a></td>
+                                <td th:text="${animal.name}">Vulpes vulpes</td>
+                                <td th:text="${animal.price + ' zł'}">210 zł</td>
+                                <td><a href="#" th:href="@{'/animal/' + ${animal.id} + '/show'}">View</a></td>
                             </tr>
                         </table>
                     </div>

@@ -13,7 +13,7 @@ public class Commodity
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
 //    @Column(name = "name_of_commodity")
     private String name;
@@ -35,12 +35,12 @@ public class Commodity
 
     public Long getId()
     {
-        return Id;
+        return id;
     }
 
     public void setId(Long id)
     {
-        Id = id;
+        this.id = id;
     }
 
 }

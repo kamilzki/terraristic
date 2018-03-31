@@ -13,7 +13,7 @@ public class Item extends Commodity
 {
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long Id;
+//    private Long id;
     private String brand;
 
 

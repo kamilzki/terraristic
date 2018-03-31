@@ -22,7 +22,7 @@ public class AnimalTest
     @Test
     public void getMinTemperature() throws Exception
     {
-        int temperature = 25;
+        Integer temperature = 25;
         animal.setMinTemperature(temperature);
 
         assertEquals(temperature, animal.getMinTemperature());
@@ -31,7 +31,7 @@ public class AnimalTest
     @Test
     public void getMaxTemperature() throws Exception
     {
-        int temperature = 27;
+        Integer temperature = 27;
         animal.setMaxTemperature(temperature);
 
         assertEquals(temperature, animal.getMaxTemperature());

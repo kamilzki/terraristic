@@ -13,7 +13,7 @@ public class TypeOfFood
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     private String nameFood;
     private boolean alive;
@@ -29,4 +29,11 @@ public class TypeOfFood
         this.alive = alive;
         this.animals = animals;
     }
+
+    public boolean isAlive()
+    {
+        return alive;
+    }
+
+
 }

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Show Recipe</title>
+    <title>Show Animal</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -16,13 +16,14 @@
             crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
 <body>
+<!--/*@thymesVar id="animal" type="com.kamilzki.terraristic.domain.Animal"*/-->
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="pannel-group">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h1 class="panel-title" th:text="${animal.name}">Dog</h1>
+                        <h1 class="panel-title" th:text="${animal.getName()}">Dog</h1>
                     </div>
                     <div class="panel-body">
                         <div class="row">
@@ -31,9 +32,9 @@
                             </div>
                             <div class="col-md-9">
                                 <ul>
-                                    <li>type one</li>
-                                    <li>type two</li>
-                                    <li>type three</li>
+                                    <li th:remove="all">type one</li>
+                                    <li th:remove="all">type two</li>
+                                    <li th:each="food : ${animal.foods}" th:text="${food.getNameFood()}">type three</li>
                                 </ul>
                             </div>
                         </div>
@@ -42,7 +43,7 @@
                                 <h5>Min temperature:</h5>
                             </div>
                             <div class="col-md-3">
-                                <p>20</p>
+                                <p th:text="${animal.getMinTemperature()}">20</p>
                             </div>
                         </div>
                         <div class="row">
@@ -50,7 +51,7 @@
                                 <h5>Max temperature</h5>
                             </div>
                             <div class="col-md-3">
-                                <p>29</p>
+                                <p th:text="${animal.getMaxTemperature()}">28</p>
                             </div>
                         </div>
                         <div class="row">
@@ -58,7 +59,7 @@
                                 <h5>Price</h5>
                             </div>
                             <div class="col-md-3">
-                                <p>140 zł</p>
+                                <p th:text="${animal.price + ' zł'}">140 zł</p>
                             </div>
                         </div>
                     </div>
@@ -71,7 +72,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <p>
+                                <p th:text="${animal.getDescription()}">
                                     Some description
                                 </p>
                             </div>

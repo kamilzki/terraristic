@@ -1,5 +1,7 @@
 package com.kamilzki.terraristic.services;
 
+import com.kamilzki.terraristic.converters.AnimalCommandToAnimal;
+import com.kamilzki.terraristic.converters.AnimalToAnimalCommand;
 import com.kamilzki.terraristic.domain.Animal;
 import com.kamilzki.terraristic.repositories.AnimalRepository;
 import org.junit.Before;
@@ -22,12 +24,18 @@ public class AnimalServiceImplTest
     @Mock
     AnimalRepository animalRepository;
 
+    @Mock
+    AnimalCommandToAnimal animalCommandToAnimal;
+
+    @Mock
+    AnimalToAnimalCommand animalToAnimalCommand;
+
     @Before
     public void setUp() throws Exception
     {
         MockitoAnnotations.initMocks(this);
 
-        animalService = new AnimalServiceImpl(animalRepository);
+        animalService = new AnimalServiceImpl(animalRepository, animalToAnimalCommand, animalCommandToAnimal);
     }
 
     @Test
