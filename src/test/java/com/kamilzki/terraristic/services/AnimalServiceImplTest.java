@@ -1,5 +1,6 @@
 package com.kamilzki.terraristic.services;
 
+import com.kamilzki.terraristic.commands.AnimalCommand;
 import com.kamilzki.terraristic.converters.AnimalCommandToAnimal;
 import com.kamilzki.terraristic.converters.AnimalToAnimalCommand;
 import com.kamilzki.terraristic.domain.Animal;
@@ -10,12 +11,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.*;
 
 public class AnimalServiceImplTest
 {
@@ -38,19 +39,85 @@ public class AnimalServiceImplTest
         animalService = new AnimalServiceImpl(animalRepository, animalToAnimalCommand, animalCommandToAnimal);
     }
 
+//    @Test
+//    public void getAnimals() throws Exception
+//    {
+//        Animal animal = new Animal();
+//        HashSet animalData = new HashSet();
+//        animalData.add(animal);
+//
+//        when(animalService.getAnimals()).thenReturn(animalData);
+//
+//        Set<Animal> animals = animalService.getAnimals();
+//
+//        assertEquals(animals.size(), 1);
+//        verify(animalRepository, times(1));
+//    }
+
     @Test
-    public void getAnimals() throws Exception
+    public void getAnimalsByIdTest() throws Exception
+    {
+        Animal animal = new Animal();
+        animal.setId(1L);
+        Optional<Animal> animalOptional = Optional.of(animal);
+
+        when(animalRepository.findById(anyLong())).thenReturn(animalOptional);
+
+        Animal animalReturned = animalService.findById(1L);
+
+        assertNotNull("Null animal returned", animalReturned);
+        verify(animalRepository, times(1)).findById(anyLong());
+        verify(animalRepository, never()).findAll();
+    }
+
+    @Test
+    public void getAnimalCommandByIdTest() throws Exception {
+        Animal animal = new Animal();
+        animal.setId(1L);
+        Optional<Animal> animalOptional = Optional.of(animal);
+
+        when(animalRepository.findById(anyLong())).thenReturn(animalOptional);
+
+        AnimalCommand animalCommand = new AnimalCommand();
+        animalCommand.setId(1L);
+
+        when(animalToAnimalCommand.convert(any())).thenReturn(animalCommand);
+
+        AnimalCommand commandById = animalService.findCommandById(1L);
+
+        assertNotNull("Null animal returned", commandById);
+        verify(animalRepository, times(1)).findById(anyLong());
+        verify(animalRepository, never()).findAll();
+    }
+
+    @Test
+    public void getAnimalsTest() throws Exception
     {
         Animal animal = new Animal();
         HashSet animalData = new HashSet();
         animalData.add(animal);
 
-        when(animalService.getAnimals()).thenReturn(animalData);
+        when(animalRepository.findAll()).thenReturn(animalData);
 
         Set<Animal> animals = animalService.getAnimals();
 
         assertEquals(animals.size(), 1);
-        verify(animalRepository, times(1));
+        verify(animalRepository, times(1)).findAll();
+        verify(animalRepository, never()).findById(anyLong());
     }
 
+    @Test
+    public void testDeleteById() throws Exception {
+
+        //given
+        Long idToDelete = Long.valueOf(2L);
+
+        //when
+        animalService.deleteById(idToDelete);
+
+        //no 'when', since method has void return type
+
+        //then
+        verify(animalRepository, times(1)).deleteById(anyLong());
+    }
 }

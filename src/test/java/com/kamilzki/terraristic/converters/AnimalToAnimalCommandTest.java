@@ -1,13 +1,11 @@
 package com.kamilzki.terraristic.converters;
 
 import com.kamilzki.terraristic.commands.AnimalCommand;
-import com.kamilzki.terraristic.commands.TypeOfFoodCommand;
 import com.kamilzki.terraristic.domain.Animal;
 import com.kamilzki.terraristic.domain.TypeOfFood;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 

@@ -51,7 +51,7 @@ public class AnimalController
     {
         AnimalCommand savedCommand = animalService.saveAnimalCommand(command);
 
-        return "redirect:/animal/" + savedCommand.getId() + "/show  ";
+        return "redirect:/animal/" + savedCommand.getId() + "/show";
     }
 
     @GetMapping
