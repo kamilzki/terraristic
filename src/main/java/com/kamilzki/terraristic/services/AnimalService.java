@@ -16,4 +16,6 @@ public interface AnimalService
     AnimalCommand findCommandById(Long id);
 
     AnimalCommand saveAnimalCommand(AnimalCommand animalCommand);
+
+    void deleteById(Long id);
 }

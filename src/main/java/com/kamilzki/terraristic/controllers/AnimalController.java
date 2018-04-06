@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class AnimalController
 {
-    AnimalService animalService;
+    private final AnimalService animalService;
 
     public AnimalController(AnimalService animalService)
     {
         this.animalService = animalService;
     }
 
+    @GetMapping //good habit
     @RequestMapping("/animal/{id}/show")
     public String showById(@PathVariable String id, Model model)
     {
@@ -26,6 +27,7 @@ public class AnimalController
         return "animal/show";
     }
 
+    @GetMapping
     @RequestMapping("animal/new")
     public String newAnimal(Model model)
     {
@@ -33,12 +35,13 @@ public class AnimalController
         return "animal/animalform";
     }
 
+    @GetMapping
     @RequestMapping("animal/{id}/update")
     public String updateAnimal(@PathVariable String id, Model model)
     {
-        model.addAttribute("animal", animalService.findCommandById(new Long(id)));
+        model.addAttribute("animal", animalService.findCommandById(Long.valueOf(id)));
 
-        return "animal/recipeform";
+        return "animal/animalform";
     }
 
     @PostMapping
@@ -48,6 +51,17 @@ public class AnimalController
     {
         AnimalCommand savedCommand = animalService.saveAnimalCommand(command);
 
-        return "redirect:/animal/show/" + savedCommand.getId();
+        return "redirect:/animal/" + savedCommand.getId() + "/show  ";
+    }
+
+    @GetMapping
+    @RequestMapping("animal/{id}/delete")
+    public String deleteAnimal(@PathVariable String id, Model model)
+    {
+        log.debug("Delete animal id="+id);
+
+        animalService.deleteById(Long.valueOf(id));
+
+        return "redirect:/";
     }
 }

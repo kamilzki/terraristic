@@ -12,9 +12,13 @@
     <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+
 </head>
 <body>
+<!--/*@thymesVar id="animals" type="java.util.List"*/-->
 <!--/*@thymesVar id="animal" type="com.kamilzki.terraristic.domain.Animal"*/-->
 <div class="container-fluid" style="margin-top: 25px">
     <div class="row">
@@ -30,22 +34,29 @@
                             <thead class="thead-inverse">
                             <tr>
                                 <th>Name</th>
-                                <th>cena</th>
+                                <th>Cena</th>
                                 <th>View</th>
+                                <th>Update</th>
+                                <th>Delete</th>
                             </tr>
                             </thead>
                             <tr th:remove="all">
                                 <td>Pogona vitticeps</td>
                                 <td>230 zł</td>
                                 <td><a href="#">View</a></td>
+                                <td><a href="#">Update</a></td>
+                                <td><a href="#">Delete</a></td>
                             </tr>
                             <tr th:each="animal : ${animals}">
                                 <td th:text="${animal.name}">Vulpes vulpes</td>
                                 <td th:text="${animal.price + ' zł'}">210 zł</td>
                                 <td><a href="#" th:href="@{'/animal/' + ${animal.id} + '/show'}">View</a></td>
+                                <td><a href="#" th:href="@{'/animal/' + ${animal.id} + '/update'}">Update</a></td>
+                                <td><a href="#" th:href="@{'/animal/' + ${animal.id} + '/delete'}">Delete</a></td>
                             </tr>
                         </table>
                     </div>
+                    <a class="btn btn-primary" th:href="@{'/animal/new'}" role="button">Add</a>
                 </div>
             </div>
         </div>

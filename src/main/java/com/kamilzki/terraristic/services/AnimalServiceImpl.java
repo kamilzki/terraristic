@@ -63,8 +63,13 @@ public class AnimalServiceImpl implements AnimalService{
         Animal detachedAnimal = animalCommandToAnimal.convert(command);
 
         Animal savedAnimal = animalRepository.save(detachedAnimal);
-        log.debug("Saved AnimalId:" + savedAnimal.getId());
+        log.debug("Saved AnimalId: " + savedAnimal.getId());
         return animalToAnimalCommand.convert(savedAnimal);
     }
 
+    @Override
+    public void deleteById(Long idToDelete)
+    {
+        animalRepository.deleteById(idToDelete);
+    }
 }
