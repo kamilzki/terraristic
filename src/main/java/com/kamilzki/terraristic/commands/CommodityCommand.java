@@ -13,7 +13,7 @@ import javax.persistence.InheritanceType;
 //@Inheritance(strategy = InheritanceType.JOINED)
 public class CommodityCommand
 {
-    private Long Id;
+    private Long id;
     private String name;
     private String description;
     private Double price;

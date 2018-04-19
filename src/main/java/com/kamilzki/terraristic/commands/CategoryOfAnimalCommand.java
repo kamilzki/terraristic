@@ -13,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class CategoryOfAnimalCommand
 {
-    private Long Id;
+    private Long id;
     private String nameCategory;
     private Set<AnimalCommand> animals = new HashSet<>();
 

@@ -1,21 +1,26 @@
 package com.kamilzki.terraristic.controllers;
 
 import com.kamilzki.terraristic.commands.AnimalCommand;
+import com.kamilzki.terraristic.commands.CategoryOfAnimalCommand;
 import com.kamilzki.terraristic.domain.Animal;
+import com.kamilzki.terraristic.domain.CategoryOfAnimal;
 import com.kamilzki.terraristic.services.AnimalService;
+import com.kamilzki.terraristic.services.CategoryOfAnimalService;
+import com.kamilzki.terraristic.services.TypeOfFoodService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import static org.junit.Assert.*;
+import java.util.HashSet;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -27,6 +32,12 @@ public class AnimalControllerTest
     @Mock
     AnimalService animalService;
 
+    @Mock
+    CategoryOfAnimalService categoryOfAnimalService;
+
+    @Mock
+    TypeOfFoodService typeOfFoodService;
+
     AnimalController controller;
 
     MockMvc mockMvc;
@@ -35,7 +46,7 @@ public class AnimalControllerTest
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        controller = new AnimalController(animalService);
+        controller = new AnimalController(animalService, categoryOfAnimalService, typeOfFoodService);
 
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
@@ -58,10 +69,27 @@ public class AnimalControllerTest
     public void testGetNewAnimalForm() throws Exception {
         AnimalCommand command = new AnimalCommand();
 
+        HashSet<CategoryOfAnimalCommand> categories = new HashSet<>();
+
+        CategoryOfAnimalCommand category1 = new CategoryOfAnimalCommand();
+        category1.setId(1L);
+        categories.add(category1);
+
+        CategoryOfAnimalCommand category2 = new CategoryOfAnimalCommand();
+        category1.setId(2L);
+        categories.add(category2);
+
+
+        when(categoryOfAnimalService.listAllCategory()).thenReturn(categories);
+
         mockMvc.perform(get("/animal/new"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("animal/animalform"))
-                .andExpect(model().attributeExists("animal"));
+                .andExpect(model().attributeExists("animal"))
+                .andExpect(model().attributeExists("allCategories"));
+
+        verify(animalService, times(0)).findById(anyLong());
+        verify(categoryOfAnimalService, times(1)).listAllCategory();
     }
 
     @Test

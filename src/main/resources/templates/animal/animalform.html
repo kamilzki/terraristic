@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <title>Animal Form</title>
@@ -38,26 +38,6 @@
                                 <div class="col-md-3 form-group">
                                     <label>Type of food:</label>
                                 </div>
-                                <div class="col-md-9 form-group">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="checkbox" value=""/>
-                                            Fruit
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="checkbox" value=""/>
-                                            Insect
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="checkbox" value=""/>
-                                            Vegetable
-                                        </label>
-                                    </div>
-                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3 form-group">
@@ -68,14 +48,83 @@
                                     <label>Max temperature:</label>
                                     <input type="text" class="form-control" th:field="*{maxTemperature}"/>
                                 </div>
+                                <!--Problems with foods...-->
+                                <!--<div class="checkbox">-->
+                                    <!--<input type="checkbox" name="foods"-->
+                                           <!--th:each="tof : ${allTypeOfFoods}"-->
+                                           <!--th:value="${tof.id}"-->
+                                           <!--th:text="${tof.name}">-->
+                                <!--</div>-->
+                                <!--<ul>-->
+                                    <!--<li th:each="tof : ${allTypeOfFoods}">-->
+                                        <!--<input type="checkbox" th:field="*{foods}" th:value="${tof.id}" />-->
+                                        <!--<label th:for="${#ids.prev('foods')}"-->
+                                               <!--th:text="#{${'animal.typeOfFood: ' + tof.name}}">Types</label>-->
+                                    <!--</li>-->
+                                <!--</ul>-->
+
+                                <!--<div th:each="currentClient, stat : ${allTypeOfFoods}">-->
+                                    <!--<input type="checkbox"-->
+                                           <!--th:name="|allTypeOfFoods[${stat.index}]|"-->
+                                           <!--th:value="${currentClient.id}"-->
+                                           <!--th:field="*{foods}"-->
+                                           <!--th:text="${currentClient.name}"-->
+                                    <!--/>-->
+                                <!--</div>-->
+
+                                <!--<div th:each="currentClient, stat : ${allTypeOfFoods}">-->
+                                    <!--<td th:text="${stat}"></td>-->
+                                    <!--<td>-->
+                                        <!--<input type="checkbox"-->
+                                               <!--th:name="|foods[${stat.index}]|"-->
+                                               <!--th:value="${currentClient.id}"-->
+                                               <!--th:checked="${currentClient.selected}"-->
+                                               <!--th:field="*{foods[__${stat.index}__].selected}">-->
+                                    <!--</td>-->
+                                <!--</div>-->
+
+                                <!--<div th:each="item : ${allTypeOfFoods}">-->
+                                    <!--<input type="checkbox" name="foods" th:value="${item.id}" />-->
+                                    <!--<label th:text="${item.name}">example</label>-->
+                                <!--</div>-->
                                 <div class="col-md-3 form-group">
-                                    <label>Category of animal:</label>
-                                    <select class="form-control">
-                                        <option>Snake</option>
-                                        <option>Spider</option>
-                                        <option>Insect</option>
+                                    <label>Category:</label>
+                                    <select class="form-control" name="categoryOfAnimal.id">
+                                        <option th:each="coa : ${allCategories}"
+                                                th:value="${coa.id}"
+                                                th:selected="${coa.id.equals(animal.categoryOfAnimal.id)}"
+                                                th:text="${coa.nameCategory}">Each</option>
                                     </select>
                                 </div>
+                                <!--<div class="col-md-3 form-group">-->
+                                    <!--<label>Category:</label>-->
+                                    <!--<select class="form-control" th:field="*{categoryOfAnimal}">-->
+                                        <!--<option value="NULL">&#45;&#45;Select&#45;&#45;</option>-->
+                                        <!--<option th:each="coaEach : ${allCategories}"-->
+                                                <!--th:value="${coaEach.id}"-->
+                                                <!--th:text="${coaEach.nameCategory}">Each</option>-->
+                                    <!--</select>-->
+
+                                    <!--&lt;!&ndash;<select class="form-control" name="categoryOfAnimalService.id">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<option th:each="coaEach : ${allCategories}"&ndash;&gt;-->
+                                                <!--&lt;!&ndash;th:value="${coaEach.id}"&ndash;&gt;-->
+                                                <!--&lt;!&ndash;th:selected="${coaEach.id.equals(animal.categoryOfAnimal.getId())}"&ndash;&gt;-->
+                                                <!--&lt;!&ndash;th:readonly="(${coaEach.id} == *{categoryOfAnimal.id})"&ndash;&gt;-->
+                                                <!--&lt;!&ndash;th:attr="coaEach=${coaEach.id}, categoryid=*{categoryOfAnimal.id}, showselected=(${coaEach.id} == *{categoryOfAnimal.id})"&ndash;&gt;-->
+                                                <!--&lt;!&ndash;th:text="${coaEach.nameCategory}">Each</option>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;<select class="form-control" th:name="*{categoryOfAnimal.id}">&ndash;&gt;-->
+                                    <!--<option th:each="difficultyValue : ${(com.kamilzki.terraristic.domain.CategoryOfAnimal)<select class="form-control" th:field="*{categoryOfAnimal}">-->
+                                    <!--<option th:each="difficultyValue : ${(com.kamilzki.terraristic.domain.CategoryOfAnimal).values()}"-->
+                                            <!--th:value="${difficultyValue.name()}"-->
+                                            <!--th:text="${difficultyValue.name()}"-->
+                                    <!--&gt;val</option>-->
+                                <!--</select>-->
+                                            <!--th:value="${difficultyValue.nameCategory()}"-->
+                                            <!--th:text="${difficultyValue.nameCategory()}"-->
+                                    <!--&gt;val</option>-->
+                                <!--</select>-->
                             </div>
                             <div class="row">
                                 <div class="col-md-3 form-group">

@@ -18,9 +18,8 @@ public class AnimalCommand extends CommodityCommand
 //    private Long id;
     private Integer minTemperature;
     private Integer maxTemperature;
-    private Set<TypeOfFoodCommand> foods = new HashSet<>();
-//    private CategoryOfAnimal categoryOfAnimal;
-
+    private Set<TypeOfFoodCommand> foods = new HashSet<>(4);
+    private CategoryOfAnimalCommand categoryOfAnimal;
 
     public AnimalCommand()
     {

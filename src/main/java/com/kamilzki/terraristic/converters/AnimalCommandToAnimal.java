@@ -2,7 +2,9 @@ package com.kamilzki.terraristic.converters;
 
 
 import com.kamilzki.terraristic.commands.AnimalCommand;
+import com.kamilzki.terraristic.commands.CategoryOfAnimalCommand;
 import com.kamilzki.terraristic.domain.Animal;
+import com.kamilzki.terraristic.domain.CategoryOfAnimal;
 import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
@@ -38,7 +40,14 @@ public class AnimalCommandToAnimal implements Converter<AnimalCommand, Animal>
         animal.setMinTemperature(animalCommand.getMinTemperature());
         animal.setMaxTemperature(animalCommand.getMaxTemperature());
 
-//        animal.setCategoryOfAnimal(animalCommand.getCategoryOfAnimal());
+        //todo, find way to save category
+        CategoryOfAnimal coa = new CategoryOfAnimal();
+        CategoryOfAnimalCommand coacommand = animalCommand.getCategoryOfAnimal();
+        coa.setId(coacommand.getId());
+        coa.setNameCategory(coacommand.getNameCategory());
+        animal.setCategoryOfAnimal(coa);
+        //        coa.setAnimals(coacommand.getAnimals());
+//        animal.setCategoryOfAnimal(animalCommand.getCategoryOfAnimal().getId());
 
         if (animalCommand.getFoods() != null && animalCommand.getFoods().size() > 0)
         {

@@ -1,7 +1,6 @@
 package com.kamilzki.terraristic.converters;
 
 import com.kamilzki.terraristic.commands.TypeOfFoodCommand;
-import com.kamilzki.terraristic.domain.Animal;
 import com.kamilzki.terraristic.domain.TypeOfFood;
 import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
@@ -32,7 +31,7 @@ public class TypeOfFoodToTypeOfFoodCommand implements Converter<TypeOfFood, Type
         final TypeOfFoodCommand command = new TypeOfFoodCommand();
 
         command.setId(source.getId());
-        command.setNameFood(source.getNameFood());
+        command.setName(source.getNameFood());
         command.setAlive(source.isAlive());
 
 //        if (source.getAnimals() != null && source.getAnimals().size() > 0)

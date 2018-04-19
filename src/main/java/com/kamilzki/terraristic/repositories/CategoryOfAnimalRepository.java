@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface CategoryOfAnimalRepository extends CrudRepository<CategoryOfAnimal,Long>
 {
     Optional<CategoryOfAnimal> findByNameCategory(String nameCategory);
+
+    Optional<CategoryOfAnimal> findById(Long id);
 }

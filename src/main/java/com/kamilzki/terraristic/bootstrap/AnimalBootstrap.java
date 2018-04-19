@@ -120,12 +120,13 @@ public class AnimalBootstrap implements ApplicationListener<ContextRefreshedEven
         insectAndVegetableAndFruit.add(insectFood);
         insectAndVegetableAndFruit.add(vegetableFood);
         insectAndVegetableAndFruit.add(fruitFood);
+        insectAndVegetableAndFruit.add(vertebrateFood);
 
         Animal brachypelmaSmithi = new Animal("Brachypelma Smithi", "", 20.00, 20, 29, spiderCategory);
         brachypelmaSmithi.setFoods(insectFoodSet);
         animals.add(brachypelmaSmithi);
 
-        Animal pogonaVitticeps = new Animal("Pogona Vitticeps", "gatunek jaszczurki z rodziny agamowatych, w języku polskim określana nazwą agama brodata. Opis Wokół głowy i grzbiet pokrywają ostre łuski, które tworzą kolczastą brodę, gdy podrażnione zwierzę nadyma podgardle.",
+        Animal pogonaVitticeps = new Animal("Pogona Vitticeps", "Gatunek jaszczurki z rodziny agamowatych, w języku polskim określana nazwą agama brodata. Wokół głowy i grzbiet pokrywają ostre łuski, które tworzą kolczastą brodę, gdy podrażnione zwierzę nadyma podgardle.",
                 200.0, 20, 33, insectAndVegetableAndFruit, reptileCategory);
         animals.add(pogonaVitticeps);
 

@@ -52,7 +52,7 @@ public class CategoryOfAnimalToCategoryOfAnimalCommandTest
         animal1.setId(ANIMAL_ID_1);
 //        animal1.setMaxTemperature(MAX_TEMP_1);
 //        TypeOfFood food = new TypeOfFood();
-//        food.setNameFood("Insect");
+//        food.setName("Insect");
 //        animal1.getFoods().add(food);
 
         Animal animal2 = new Animal();

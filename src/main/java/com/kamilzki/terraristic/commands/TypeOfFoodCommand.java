@@ -13,7 +13,7 @@ import java.util.Set;
 public class TypeOfFoodCommand
 {
     private Long id;
-    private String nameFood;
+    private String name;
     private boolean alive;
 
 }
