@@ -17,4 +17,5 @@ public class CommodityCommand
     private String name;
     private String description;
     private Double price;
+    private Byte[] image;
 }

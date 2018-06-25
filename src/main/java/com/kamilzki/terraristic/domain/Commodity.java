@@ -22,6 +22,9 @@ public class Commodity
     private String description;
     private Double price;
 
+    @Lob
+    private Byte[] image;
+
     public Commodity()
     {
     }

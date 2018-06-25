@@ -38,6 +38,7 @@ public class AnimalToAnimalCommand implements Converter<Animal, AnimalCommand>
         command.setName(source.getName());
         command.setPrice(source.getPrice());
         command.setDescription(source.getDescription());
+        command.setImage(source.getImage());
 //        command.setCategoryOfAnimal(source.getCategoryOfAnimal());
         CategoryOfAnimalCommand coacommand = new CategoryOfAnimalCommand();
         CategoryOfAnimal coa = source.getCategoryOfAnimal();
