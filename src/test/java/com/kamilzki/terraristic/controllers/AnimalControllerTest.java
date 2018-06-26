@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.HashSet;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -59,7 +60,7 @@ public class AnimalControllerTest
 
         when(animalService.findById(anyLong())).thenReturn(animal);
 
-        mockMvc.perform(get("/animal/1/show"))
+        mockMvc.perform(get("/commodity/animal/1/show"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("animal/show"))
                 .andExpect(model().attributeExists("animal"));
@@ -82,9 +83,9 @@ public class AnimalControllerTest
 
         when(categoryOfAnimalService.listAllCategory()).thenReturn(categories);
 
-        mockMvc.perform(get("/animal/new"))
+        mockMvc.perform(get("/commodity/animal/new"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("animal/animalform"))
+                .andExpect(view().name("commodity/animal/animalform"))
                 .andExpect(model().attributeExists("animal"))
                 .andExpect(model().attributeExists("allCategories"));
 
@@ -99,13 +100,13 @@ public class AnimalControllerTest
 
         when(animalService.saveAnimalCommand(any())).thenReturn(command);
 
-        mockMvc.perform(post("/animal")
+        mockMvc.perform(post("/commodity/animal")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("id", "")
                 .param("description", "some string")
         )
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/animal/2/show"));
+                .andExpect(view().name("redirect:/commodity/animal/2/show"));
     }
 
     @Test
@@ -116,16 +117,16 @@ public class AnimalControllerTest
 
         when(animalService.findCommandById(anyLong())).thenReturn(command);
 
-        mockMvc.perform(get("/animal/33/update"))
+        mockMvc.perform(get("/commodity/animal/33/update"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("animal/animalform"))
+                .andExpect(view().name("commodity/animal/animalform"))
                 .andExpect(model().attributeExists("animal"));
     }
 
     @Test
     public void testDeleteAction() throws Exception
     {
-        mockMvc.perform(get("/animal/3/delete"))
+        mockMvc.perform(get("/commodity/animal/3/delete"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/"));
 

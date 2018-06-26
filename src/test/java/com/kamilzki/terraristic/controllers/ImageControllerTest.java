@@ -52,7 +52,7 @@ public class ImageControllerTest
         when(animalService.findCommandById(anyLong())).thenReturn(command);
 
         //when
-        mockMvc.perform(get("/animal/1/image"))
+        mockMvc.perform(get("/commodity/animal/1/image"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("animal"));
 
@@ -65,9 +65,9 @@ public class ImageControllerTest
         MockMultipartFile mockMultipartFile = new MockMultipartFile("imagefile", "testimage.txt",
                 "text/plain", "test image".getBytes());
 
-        mockMvc.perform(multipart("/animal/1/image").file(mockMultipartFile))
+        mockMvc.perform(multipart("/commodity/animal/1/image").file(mockMultipartFile))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(header().string("Location", "/animal/1/show"));
+                .andExpect(header().string("Location", "/commodity/animal/1/show"));
 
         verify(imageService, times(1)).saveImageFile(anyLong(), any());
     }
@@ -95,7 +95,7 @@ public class ImageControllerTest
         when(animalService.findCommandById(anyLong())).thenReturn(animalCommand);
 
         //when
-        MockHttpServletResponse servletResponse = mockMvc.perform(get("/animal/1/animalimage"))
+        MockHttpServletResponse servletResponse = mockMvc.perform(get("/commodity/animal/1/animalimage"))
                 .andExpect(status().isOk())
                 .andReturn().getResponse();
 

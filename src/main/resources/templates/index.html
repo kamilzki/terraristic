@@ -50,13 +50,13 @@
                             <tr th:each="animal : ${animals}">
                                 <td th:text="${animal.name}">Vulpes vulpes</td>
                                 <td th:text="${animal.price + ' zł'}">210 zł</td>
-                                <td><a href="#" th:href="@{'/animal/' + ${animal.id} + '/show'}">View</a></td>
-                                <td><a href="#" th:href="@{'/animal/' + ${animal.id} + '/update'}">Update</a></td>
-                                <td><a href="#" th:href="@{'/animal/' + ${animal.id} + '/delete'}">Delete</a></td>
+                                <td><a href="#" th:href="@{'/commodity/animal/' + ${animal.id} + '/show'}">View</a></td>
+                                <td><a href="#" th:href="@{'/commodity/animal/' + ${animal.id} + '/update'}">Update</a></td>
+                                <td><a href="#" th:href="@{'/commodity/animal/' + ${animal.id} + '/delete'}">Delete</a></td>
                             </tr>
                         </table>
                     </div>
-                    <a class="btn btn-primary" th:href="@{'/animal/new'}" role="button">Add</a>
+                    <a class="btn btn-primary" th:href="@{'/commodity/animal/new'}" role="button">Add</a>
                 </div>
             </div>
         </div>

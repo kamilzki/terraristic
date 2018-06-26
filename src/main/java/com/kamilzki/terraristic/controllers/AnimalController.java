@@ -29,16 +29,16 @@ public class AnimalController
     }
 
     @GetMapping //good habit
-    @RequestMapping("/animal/{id}/show")
+    @RequestMapping("/commodity/animal/{id}/show")
     public String showById(@PathVariable String id, Model model)
     {
         model.addAttribute("animal", animalService.findById(new Long(id)));
 
-        return "animal/show";
+        return "commodity/animal/show";
     }
 
     @GetMapping
-    @RequestMapping("animal/new")
+    @RequestMapping("commodity/animal/new")
     public String newAnimal(Model model)
     {
         AnimalCommand animalCommand = new AnimalCommand();
@@ -50,11 +50,11 @@ public class AnimalController
         model.addAttribute("allCategories", categoryOfAnimalService.listAllCategory());
         model.addAttribute("allTypeOfFoods", typeOfFoodService.listAllTypeOfFoods());
 
-        return "animal/animalform";
+        return "commodity/animal/animalform";
     }
 
     @GetMapping
-    @RequestMapping("animal/{id}/update")
+    @RequestMapping("commodity/animal/{id}/update")
     public String updateAnimal(@PathVariable String id, Model model)
     {
         AnimalCommand animalCommand = animalService.findCommandById(Long.valueOf(id));
@@ -66,21 +66,21 @@ public class AnimalController
         model.addAttribute("allCategories", categoryOfAnimalService.listAllCategory());
         model.addAttribute("allTypeOfFoods", typeOfFoodService.listAllTypeOfFoods());
 
-        return "animal/animalform";
+        return "commodity/animal/animalform";
     }
 
     @PostMapping
-    @RequestMapping("animal")
+    @RequestMapping("commodity/animal")
 //    @RequestMapping(value = "animal", method = RequestMethod.POST) //better up
     public String saveOrUpdate(@ModelAttribute AnimalCommand command)
     {
         AnimalCommand savedCommand = animalService.saveAnimalCommand(command);
 
-        return "redirect:/animal/" + savedCommand.getId() + "/show";
+        return "redirect:/commodity/animal/" + savedCommand.getId() + "/show";
     }
 
     @GetMapping
-    @RequestMapping("animal/{id}/delete")
+    @RequestMapping("commodity/animal/{id}/delete")
     public String deleteAnimal(@PathVariable String id, Model model)
     {
         log.debug("Delete animal id="+id);

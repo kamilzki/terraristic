@@ -29,23 +29,23 @@ public class ImageController
         this.animalService = animalService;
     }
 
-    @GetMapping("animal/{id}/image")
+    @GetMapping("commodity/animal/{id}/image")
     public String showUploadForm(@PathVariable String id, Model model)
     {
         model.addAttribute("animal", animalService.findCommandById(Long.valueOf(id)));
 
-        return "animal/imageuploadform";
+        return "commodity/animal/imageuploadform";
     }
 
-    @PostMapping("animal/{id}/image")
+    @PostMapping("commodity/animal/{id}/image")
     public String handleImagePost(@PathVariable String id, @RequestParam("imagefile") MultipartFile file)
     {
         imageService.saveImageFile(Long.valueOf(id), file);
 
-        return "redirect:/animal/" + id + "/show";
+        return "redirect:/commodity/animal/" + id + "/show";
     }
 
-    @GetMapping("animal/{id}/animalimage")
+    @GetMapping("commodity/animal/{id}/animalimage")
     public void renderImageFromDB(@PathVariable String id, HttpServletResponse response) throws IOException
     {
         AnimalCommand animalCommand = animalService.findCommandById(Long.valueOf(id));
