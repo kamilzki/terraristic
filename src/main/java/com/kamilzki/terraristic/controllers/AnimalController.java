@@ -2,16 +2,16 @@ package com.kamilzki.terraristic.controllers;
 
 import com.kamilzki.terraristic.commands.AnimalCommand;
 import com.kamilzki.terraristic.commands.CategoryOfAnimalCommand;
-import com.kamilzki.terraristic.domain.CategoryOfAnimal;
+import com.kamilzki.terraristic.exceptions.NotFoundException;
 import com.kamilzki.terraristic.services.AnimalService;
 import com.kamilzki.terraristic.services.CategoryOfAnimalService;
 import com.kamilzki.terraristic.services.TypeOfFoodService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
+import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
 @Controller
@@ -88,5 +88,18 @@ public class AnimalController
         animalService.deleteById(Long.valueOf(id));
 
         return "redirect:/";
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public ModelAndView handleNotFound()
+    {
+        log.error("Handling not found exception in AnimalController");
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("404error");
+
+        return modelAndView;
     }
 }

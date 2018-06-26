@@ -3,7 +3,7 @@ package com.kamilzki.terraristic.controllers;
 import com.kamilzki.terraristic.commands.AnimalCommand;
 import com.kamilzki.terraristic.commands.CategoryOfAnimalCommand;
 import com.kamilzki.terraristic.domain.Animal;
-import com.kamilzki.terraristic.domain.CategoryOfAnimal;
+import com.kamilzki.terraristic.exceptions.NotFoundException;
 import com.kamilzki.terraristic.services.AnimalService;
 import com.kamilzki.terraristic.services.CategoryOfAnimalService;
 import com.kamilzki.terraristic.services.TypeOfFoodService;
@@ -16,17 +16,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.HashSet;
-import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class AnimalControllerTest
 {
@@ -62,8 +58,18 @@ public class AnimalControllerTest
 
         mockMvc.perform(get("/commodity/animal/1/show"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("animal/show"))
+                .andExpect(view().name("commodity/animal/show"))
                 .andExpect(model().attributeExists("animal"));
+    }
+
+    @Test
+    public void testGetAnimalNotFound() throws Exception
+    {
+        when(animalService.findById(anyLong())).thenThrow(NotFoundException.class);
+
+        mockMvc.perform(get("/commodity/animal/1/show"))
+                .andExpect(status().isNotFound())
+                .andExpect(view().name("404error"));
     }
 
     @Test

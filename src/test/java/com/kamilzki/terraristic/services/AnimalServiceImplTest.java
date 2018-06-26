@@ -4,6 +4,7 @@ import com.kamilzki.terraristic.commands.AnimalCommand;
 import com.kamilzki.terraristic.converters.AnimalCommandToAnimal;
 import com.kamilzki.terraristic.converters.AnimalToAnimalCommand;
 import com.kamilzki.terraristic.domain.Animal;
+import com.kamilzki.terraristic.exceptions.NotFoundException;
 import com.kamilzki.terraristic.repositories.AnimalRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -55,7 +56,7 @@ public class AnimalServiceImplTest
 //    }
 
     @Test
-    public void getAnimalsByIdTest() throws Exception
+    public void getAnimalByIdTest() throws Exception
     {
         Animal animal = new Animal();
         animal.setId(1L);
@@ -68,6 +69,18 @@ public class AnimalServiceImplTest
         assertNotNull("Null animal returned", animalReturned);
         verify(animalRepository, times(1)).findById(anyLong());
         verify(animalRepository, never()).findAll();
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void getAnimalByIdNotFoundTest()
+    {
+        Optional<Animal> optionalAnimal = Optional.empty();
+
+        when(animalRepository.findById(anyLong())).thenReturn(optionalAnimal);
+
+        Animal animal = animalService.findById(1L);
+
+        //should go boom
     }
 
     @Test
@@ -110,7 +123,7 @@ public class AnimalServiceImplTest
     public void testDeleteById() throws Exception {
 
         //given
-        Long idToDelete = Long.valueOf(2L);
+        Long idToDelete = 2L;
 
         //when
         animalService.deleteById(idToDelete);

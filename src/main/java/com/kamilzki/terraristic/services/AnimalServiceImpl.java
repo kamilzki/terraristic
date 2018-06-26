@@ -4,6 +4,7 @@ import com.kamilzki.terraristic.commands.AnimalCommand;
 import com.kamilzki.terraristic.converters.AnimalCommandToAnimal;
 import com.kamilzki.terraristic.converters.AnimalToAnimalCommand;
 import com.kamilzki.terraristic.domain.Animal;
+import com.kamilzki.terraristic.exceptions.NotFoundException;
 import com.kamilzki.terraristic.repositories.AnimalRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,7 @@ public class AnimalServiceImpl implements AnimalService{
 
         if (!animalOptional.isPresent())
         {
-            throw new RuntimeException("Animal Not Found!");
+            throw new NotFoundException("Animal Not Found!");
         }
 
         return animalOptional.get();
