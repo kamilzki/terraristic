@@ -45,7 +45,9 @@ public class AnimalControllerTest
 
         controller = new AnimalController(animalService, categoryOfAnimalService, typeOfFoodService);
 
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(controller)
+            .setControllerAdvice(new ControllerExceptionHandler())
+            .build();
     }
 
     @Test
@@ -70,6 +72,15 @@ public class AnimalControllerTest
         mockMvc.perform(get("/commodity/animal/1/show"))
                 .andExpect(status().isNotFound())
                 .andExpect(view().name("404error"));
+    }
+
+    @Test
+    public void testGetAnimalNumberFormatException() throws Exception
+    {
+
+        mockMvc.perform(get("/commodity/animal/1w2/show"))
+                .andExpect(status().isBadRequest())
+                .andExpect(view().name("400error"));
     }
 
     @Test

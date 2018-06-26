@@ -90,16 +90,4 @@ public class AnimalController
         return "redirect:/";
     }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(NotFoundException.class)
-    public ModelAndView handleNotFound()
-    {
-        log.error("Handling not found exception in AnimalController");
-
-        ModelAndView modelAndView = new ModelAndView();
-
-        modelAndView.setViewName("404error");
-
-        return modelAndView;
-    }
 }

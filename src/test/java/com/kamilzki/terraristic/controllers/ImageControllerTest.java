@@ -39,7 +39,9 @@ public class ImageControllerTest
         MockitoAnnotations.initMocks(this);
 
         controller = new ImageController(imageService, animalService);
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                .setControllerAdvice(new ControllerExceptionHandler())
+                .build();
     }
 
     @Test
@@ -57,6 +59,14 @@ public class ImageControllerTest
                 .andExpect(model().attributeExists("animal"));
 
         verify(animalService, times(1)).findCommandById(anyLong());
+    }
+
+    @Test
+    public void testGetImageNumberFormatException() throws Exception {
+
+        mockMvc.perform(get("/commodity/animal/a4f/animalimage"))
+                .andExpect(status().isBadRequest())
+                .andExpect(view().name("400error"));
     }
 
     @Test
