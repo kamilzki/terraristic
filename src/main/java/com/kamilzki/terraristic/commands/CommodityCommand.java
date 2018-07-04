@@ -23,7 +23,7 @@ public class CommodityCommand
     @Size(min = 3, max = 100)
     private String name;
 
-    @Size(max = 1000)
+    @Size(max = 5000)
     private String description;
 
     @Min(0)

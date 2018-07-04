@@ -77,7 +77,7 @@ public class AnimalController
     }
 
     @PostMapping("commodity/animal")
-    public String saveOrUpdate(@Valid @ModelAttribute AnimalCommand command, BindingResult bindingResult)
+    public String saveOrUpdate(@Valid @ModelAttribute("animal") AnimalCommand command, BindingResult bindingResult)
     {
         log.debug("post - saveOrUpdate");
         if (bindingResult.hasErrors())

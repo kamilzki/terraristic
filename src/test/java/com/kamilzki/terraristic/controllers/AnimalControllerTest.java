@@ -140,7 +140,7 @@ public class AnimalControllerTest
                 .param("id", "")
         )
                 .andExpect(status().isOk())
-                .andExpect(model().attributeExists("animalCommand"))
+                .andExpect(model().attributeExists("animal"))
                 .andExpect(view().name("commodity/animal/animalform"));
     }
 
