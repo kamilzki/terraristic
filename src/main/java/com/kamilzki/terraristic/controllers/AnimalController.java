@@ -10,13 +10,18 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 @Slf4j
 @Controller
 public class AnimalController
 {
+    private static final String COMMODITY_ANIMAL_ANIMALFORM= "commodity/animal/animalform";
+
     private final AnimalService animalService;
     private final CategoryOfAnimalService categoryOfAnimalService;
     private final TypeOfFoodService typeOfFoodService;
@@ -41,6 +46,7 @@ public class AnimalController
     @RequestMapping("commodity/animal/new")
     public String newAnimal(Model model)
     {
+        log.debug("get - new Animal");
         AnimalCommand animalCommand = new AnimalCommand();
         model.addAttribute("animal", animalCommand);
 
@@ -50,13 +56,14 @@ public class AnimalController
         model.addAttribute("allCategories", categoryOfAnimalService.listAllCategory());
         model.addAttribute("allTypeOfFoods", typeOfFoodService.listAllTypeOfFoods());
 
-        return "commodity/animal/animalform";
+        return COMMODITY_ANIMAL_ANIMALFORM;
     }
 
     @GetMapping
     @RequestMapping("commodity/animal/{id}/update")
     public String updateAnimal(@PathVariable String id, Model model)
     {
+        log.debug("get - update Animal");
         AnimalCommand animalCommand = animalService.findCommandById(Long.valueOf(id));
         model.addAttribute("animal", animalCommand);
 
@@ -66,15 +73,24 @@ public class AnimalController
         model.addAttribute("allCategories", categoryOfAnimalService.listAllCategory());
         model.addAttribute("allTypeOfFoods", typeOfFoodService.listAllTypeOfFoods());
 
-        return "commodity/animal/animalform";
+        return COMMODITY_ANIMAL_ANIMALFORM;
     }
 
-    @PostMapping
-    @RequestMapping("commodity/animal")
-//    @RequestMapping(value = "animal", method = RequestMethod.POST) //better up
-    public String saveOrUpdate(@ModelAttribute AnimalCommand command)
+    @PostMapping("commodity/animal")
+    public String saveOrUpdate(@Valid @ModelAttribute AnimalCommand command, BindingResult bindingResult)
     {
+        log.debug("post - saveOrUpdate");
+        if (bindingResult.hasErrors())
+        {
+            bindingResult.getAllErrors().forEach(objectError ->
+            {
+                log.debug(objectError.toString());
+            });
+            return COMMODITY_ANIMAL_ANIMALFORM;
+        }
+
         AnimalCommand savedCommand = animalService.saveAnimalCommand(command);
+
 
         return "redirect:/commodity/animal/" + savedCommand.getId() + "/show";
     }

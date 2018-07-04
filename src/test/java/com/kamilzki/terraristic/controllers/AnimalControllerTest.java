@@ -120,10 +120,28 @@ public class AnimalControllerTest
         mockMvc.perform(post("/commodity/animal")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("id", "")
+                .param("name", "some name")
                 .param("description", "some string")
         )
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/commodity/animal/2/show"));
+    }
+
+    @Test
+    public void testPostNewAnimalFormValidationFail() throws Exception
+    {
+        AnimalCommand command = new AnimalCommand();
+        command.setId(2L);
+
+        when(animalService.saveAnimalCommand(any())).thenReturn(command);
+
+        mockMvc.perform(post("/commodity/animal")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("id", "")
+        )
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("animalCommand"))
+                .andExpect(view().name("commodity/animal/animalform"));
     }
 
     @Test

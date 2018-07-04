@@ -6,6 +6,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +20,12 @@ import java.util.Set;
 public class AnimalCommand extends CommodityCommand
 {
 //    private Long id;
+    @Min(1)
+    @Max(50)
     private Integer minTemperature;
+
+    @Min(1)
+    @Max(50)
     private Integer maxTemperature;
     private Set<TypeOfFoodCommand> foods = new HashSet<>(4);
     private CategoryOfAnimalCommand categoryOfAnimal;
