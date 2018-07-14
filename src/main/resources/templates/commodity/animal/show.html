@@ -16,92 +16,99 @@
             crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<!--/*@thymesVar id="animal" type="com.kamilzki.terraristic.domain.Animal"*/-->
-<div class="container-fluid" style="margin-top: 20px">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="pannel-group">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <h1 class="panel-title" th:text="${animal.getName()}">Dog</h1>
-                            </div>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 
-                            <div class="col-md-8">
-                                <a class="btn btn-default" href="#"
-                                   th:href="@{'/commodity/animal/' + ${animal.id} + '/image'}" role="button">Change Image</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <h5>Type of food:</h5>
-                            </div>
-                            <div class="col-md-3">
-                                <ul>
-                                    <li th:remove="all">type one</li>
-                                    <li th:remove="all">type two</li>
-                                    <li th:each="food : ${animal.foods}" th:text="${food.getNameFood()}">type three</li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6">
-                                <img src="../../../static/images/pogona_vitticeps.jpg"
-                                     th:src="@{'/commodity/animal/' + ${animal.id} + '/animalimage'}"
-                                     width="200" height="200">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <h5>Category:</h5>
-                            </div>
-                            <div class="col-md-3">
-                                <p th:text="${animal.getCategoryOfAnimal().getNameCategory()}">Insect</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <h5>Min temperature:</h5>
-                            </div>
-                            <div class="col-md-3">
-                                <p th:text="${animal.getMinTemperature()}">20</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <h5>Max temperature</h5>
-                            </div>
-                            <div class="col-md-3">
-                                <p th:text="${animal.getMaxTemperature()}">28</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <h5>Price</h5>
-                            </div>
-                            <div class="col-md-3">
-                                <p th:text="${animal.price + ' zł'}">140 zł</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!--/*@thymesVar id="animal" type="com.kamilzki.terraristic.domain.Animal"*/-->
+    <div class="container-fluid" style="margin-top: 20px">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="pannel-group">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h1 class="panel-title" th:text="${animal.getName()}">Dog</h1>
+                                </div>
 
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h1 class="panel-title">Description</h1>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p th:text="${animal.getDescription()}">
-                                    Some description
-                                </p>
+                                <div class="col-md-8">
+                                    <a class="btn btn-default" href="#"
+                                       th:href="@{'/commodity/animal/' + ${animal.id} + '/image'}" role="button">Change
+                                        Image</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Type of food:</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <ul>
+                                        <li th:remove="all">type one</li>
+                                        <li th:remove="all">type two</li>
+                                        <li th:each="food : ${animal.foods}" th:text="${food.getNameFood()}">type
+                                            three
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="../../../static/images/pogona_vitticeps.jpg"
+                                         th:src="@{'/commodity/animal/' + ${animal.id} + '/animalimage'}"
+                                         width="200" height="200">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Category:</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <p th:text="${animal.getCategoryOfAnimal().getNameCategory()}">Insect</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Min temperature:</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <p th:text="${animal.getMinTemperature()}">20</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Max temperature</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <p th:text="${animal.getMaxTemperature()}">28</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Price</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <p th:text="${animal.price + ' zł'}">140 zł</p>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Description</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p th:text="${animal.getDescription()}">
+                                        Some description
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="btn btn-default" th:href="@{'/'}" role="button">Back</a>
                 </div>
-                <a class="btn btn-default" th:href="@{'/'}" role="button">Back</a>
             </div>
         </div>
     </div>
