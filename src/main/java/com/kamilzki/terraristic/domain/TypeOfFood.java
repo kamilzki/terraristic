@@ -21,7 +21,9 @@ public class TypeOfFood
     @ManyToMany(mappedBy = "foods")
     private Set<Animal> animals;
 
-    public TypeOfFood() {}
+    public TypeOfFood()
+    {
+    }
 
     public TypeOfFood(String nameFood, boolean alive, Set<Animal> animals)
     {

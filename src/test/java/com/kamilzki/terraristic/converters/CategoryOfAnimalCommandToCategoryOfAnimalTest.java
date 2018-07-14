@@ -71,7 +71,7 @@ public class CategoryOfAnimalCommandToCategoryOfAnimalTest
         command.getAnimals().add(animalCommand2);
         command.getAnimals().add(animalCommand3);
 
-        System.out.println("command.getAnimals().size: "+command.getAnimals().size());
+        System.out.println("command.getAnimals().size: " + command.getAnimals().size());
         CategoryOfAnimal category = converter.convert(command);
 
         assertNotNull(category);

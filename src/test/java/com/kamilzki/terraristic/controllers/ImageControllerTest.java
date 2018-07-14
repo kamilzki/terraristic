@@ -62,7 +62,8 @@ public class ImageControllerTest
     }
 
     @Test
-    public void testGetImageNumberFormatException() throws Exception {
+    public void testGetImageNumberFormatException() throws Exception
+    {
 
         mockMvc.perform(get("/commodity/animal/a4f/animalimage"))
                 .andExpect(status().isBadRequest())

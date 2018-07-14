@@ -26,7 +26,8 @@ public class TypeOfFoodRepositoryTest
     }
 
     @Test
-    public void findByNameFood() throws Exception {
+    public void findByNameFood() throws Exception
+    {
 
         Optional<TypeOfFood> typeOfFoodOptional = foodRepository.findByNameFood("Fruit");
 
@@ -34,7 +35,8 @@ public class TypeOfFoodRepositoryTest
     }
 
     @Test
-    public void findByNameFood2() throws Exception {
+    public void findByNameFood2() throws Exception
+    {
 
         Optional<TypeOfFood> typeOfFoodOptional = foodRepository.findByNameFood("Insect");
 

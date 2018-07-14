@@ -40,16 +40,19 @@ public class AnimalToAnimalCommand implements Converter<Animal, AnimalCommand>
         command.setDescription(source.getDescription());
         command.setImage(source.getImage());
 //        command.setCategoryOfAnimal(source.getCategoryOfAnimal());
-        CategoryOfAnimalCommand coacommand = new CategoryOfAnimalCommand();
-        CategoryOfAnimal coa = source.getCategoryOfAnimal();
-        coacommand.setId(coa.getId());
-        coacommand.setNameCategory(coa.getNameCategory());
-        command.setCategoryOfAnimal(coacommand);
 
+        CategoryOfAnimal coa = source.getCategoryOfAnimal();
+        if (coa != null)
+        {
+            CategoryOfAnimalCommand coacommand = new CategoryOfAnimalCommand();
+            coacommand.setId(coa.getId());
+            coacommand.setNameCategory(coa.getNameCategory());
+            command.setCategoryOfAnimal(coacommand);
+        }
         if (source.getFoods() != null && source.getFoods().size() > 0)
         {
             source.getFoods()
-                    .forEach(food-> command.getFoods().add(foodConverter.convert(food)));
+                    .forEach(food -> command.getFoods().add(foodConverter.convert(food)));
         }
 
         return command;

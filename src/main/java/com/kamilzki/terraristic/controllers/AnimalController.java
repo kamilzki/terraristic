@@ -15,12 +15,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 @Slf4j
 @Controller
 public class AnimalController
 {
-    private static final String COMMODITY_ANIMAL_ANIMALFORM= "commodity/animal/animalform";
+    private static final String COMMODITY_ANIMAL_ANIMALFORM = "commodity/animal/animalform";
 
     private final AnimalService animalService;
     private final CategoryOfAnimalService categoryOfAnimalService;
@@ -86,6 +87,8 @@ public class AnimalController
             {
                 log.debug(objectError.toString());
             });
+            Map<String, Object> model = bindingResult.getModel();
+            model.put("allCategories", categoryOfAnimalService.listAllCategory());
             return COMMODITY_ANIMAL_ANIMALFORM;
         }
 
@@ -99,7 +102,7 @@ public class AnimalController
     @RequestMapping("commodity/animal/{id}/delete")
     public String deleteAnimal(@PathVariable String id, Model model)
     {
-        log.debug("Delete animal id="+id);
+        log.debug("Delete animal id=" + id);
 
         animalService.deleteById(Long.valueOf(id));
 

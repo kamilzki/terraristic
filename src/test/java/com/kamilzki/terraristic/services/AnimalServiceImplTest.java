@@ -84,7 +84,8 @@ public class AnimalServiceImplTest
     }
 
     @Test
-    public void getAnimalCommandByIdTest() throws Exception {
+    public void getAnimalCommandByIdTest() throws Exception
+    {
         Animal animal = new Animal();
         animal.setId(1L);
         Optional<Animal> animalOptional = Optional.of(animal);
@@ -120,7 +121,8 @@ public class AnimalServiceImplTest
     }
 
     @Test
-    public void testDeleteById() throws Exception {
+    public void testDeleteById() throws Exception
+    {
 
         //given
         Long idToDelete = 2L;

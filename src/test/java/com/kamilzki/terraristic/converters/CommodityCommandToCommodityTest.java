@@ -27,12 +27,14 @@ public class CommodityCommandToCommodityTest
     }
 
     @Test
-    public void testNullObject() throws Exception {
+    public void testNullObject() throws Exception
+    {
         assertNull(converter.convert(null));
     }
 
     @Test
-    public void testEmptyObject() throws Exception {
+    public void testEmptyObject() throws Exception
+    {
         assertNotNull(converter.convert(new CommodityCommand()));
     }
 

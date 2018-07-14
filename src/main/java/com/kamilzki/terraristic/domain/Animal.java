@@ -14,7 +14,7 @@ import java.util.Set;
 public class Animal extends Commodity
 {
 
-//    @Id
+    //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private Long id;
     private Integer minTemperature;
@@ -29,7 +29,9 @@ public class Animal extends Commodity
     @ManyToOne
     private CategoryOfAnimal categoryOfAnimal;
 
-    public Animal(){}
+    public Animal()
+    {
+    }
 
     public Animal(String name, String description, Double price, int minTemperature, int maxTemperature, Set<TypeOfFood> foods, CategoryOfAnimal categoryOfAnimal)
     {

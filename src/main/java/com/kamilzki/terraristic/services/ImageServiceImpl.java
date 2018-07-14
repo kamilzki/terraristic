@@ -28,10 +28,10 @@ public class ImageServiceImpl implements ImageService
             Animal animal = animalRepository.findById(animalId).get();
 
             Byte[] byteObject = new Byte[file.getBytes().length];
-            
-            int i=0;
 
-            for (byte b: file.getBytes())
+            int i = 0;
+
+            for (byte b : file.getBytes())
             {
                 byteObject[i++] = b;
             }
@@ -39,8 +39,7 @@ public class ImageServiceImpl implements ImageService
             animal.setImage(byteObject);
 
             animalRepository.save(animal);
-        }
-        catch (IOException e)
+        } catch (IOException e)
         {
             //todo write better handler
             log.error("Error occured!", e);

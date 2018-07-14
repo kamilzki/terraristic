@@ -28,9 +28,9 @@ public class CategoryOfAnimalServiceImpl implements CategoryOfAnimalService
     public Set<CategoryOfAnimalCommand> listAllCategory()
     {
         return StreamSupport.stream(categoryOfAnimalRepository.findAll()
-            .spliterator(), false)
-            .map(categoryOfAnimalToCategoryOfAnimalCommand::convert)
-            .collect(Collectors.toSet());
+                .spliterator(), false)
+                .map(categoryOfAnimalToCategoryOfAnimalCommand::convert)
+                .collect(Collectors.toSet());
     }
 
     @Override

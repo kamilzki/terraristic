@@ -41,18 +41,20 @@ public class AnimalCommandToAnimal implements Converter<AnimalCommand, Animal>
         animal.setMaxTemperature(animalCommand.getMaxTemperature());
 
         //todo, find way to save category
-        CategoryOfAnimal coa = new CategoryOfAnimal();
         CategoryOfAnimalCommand coacommand = animalCommand.getCategoryOfAnimal();
-        coa.setId(coacommand.getId());
-        coa.setNameCategory(coacommand.getNameCategory());
-        animal.setCategoryOfAnimal(coa);
-        //        coa.setAnimals(coacommand.getAnimals());
-//        animal.setCategoryOfAnimal(animalCommand.getCategoryOfAnimal().getId());
-
+        if (coacommand != null)
+        {
+            CategoryOfAnimal coa = new CategoryOfAnimal();
+            coa.setId(coacommand.getId());
+            coa.setNameCategory(coacommand.getNameCategory());
+            animal.setCategoryOfAnimal(coa);
+//            coa.setAnimals(coacommand.getAnimals());
+//            animal.setCategoryOfAnimal(animalCommand.getCategoryOfAnimal().getId());
+        }
         if (animalCommand.getFoods() != null && animalCommand.getFoods().size() > 0)
         {
             animalCommand.getFoods()
-                    .forEach(food-> animal.getFoods().add(foodConverter.convert(food)));
+                    .forEach(food -> animal.getFoods().add(foodConverter.convert(food)));
         }
 
         return animal;

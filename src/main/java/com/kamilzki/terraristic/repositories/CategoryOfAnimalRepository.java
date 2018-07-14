@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface CategoryOfAnimalRepository extends CrudRepository<CategoryOfAnimal,Long>
+public interface CategoryOfAnimalRepository extends CrudRepository<CategoryOfAnimal, Long>
 {
     Optional<CategoryOfAnimal> findByNameCategory(String nameCategory);
 

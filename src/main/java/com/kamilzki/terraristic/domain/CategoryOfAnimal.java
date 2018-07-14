@@ -21,7 +21,9 @@ public class CategoryOfAnimal
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryOfAnimal")
     private Set<Animal> animals = new HashSet<>();
 
-    public CategoryOfAnimal() {}
+    public CategoryOfAnimal()
+    {
+    }
 
     public CategoryOfAnimal(String nameCategory, Set<Animal> animals)
     {
@@ -36,7 +38,7 @@ public class CategoryOfAnimal
 
     public void setId(Long id)
     {
-        System.out.println("setId: "+ id + ", before: " + this.id);
+        System.out.println("setId: " + id + ", before: " + this.id);
         this.id = id;
         System.out.println("after: " + this.id);
     }

@@ -15,7 +15,7 @@ public class Commodity
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @Column(name = "name_of_commodity")
+    //    @Column(name = "name_of_commodity")
     private String name;
 
     @Lob

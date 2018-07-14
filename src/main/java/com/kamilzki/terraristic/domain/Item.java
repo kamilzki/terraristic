@@ -11,7 +11,7 @@ import javax.persistence.Id;
 @Entity
 public class Item extends Commodity
 {
-//    @Id
+    //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private Long id;
     private String brand;

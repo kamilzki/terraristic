@@ -40,18 +40,20 @@ public class AnimalControllerTest
     MockMvc mockMvc;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws Exception
+    {
         MockitoAnnotations.initMocks(this);
 
         controller = new AnimalController(animalService, categoryOfAnimalService, typeOfFoodService);
 
         mockMvc = MockMvcBuilders.standaloneSetup(controller)
-            .setControllerAdvice(new ControllerExceptionHandler())
-            .build();
+                .setControllerAdvice(new ControllerExceptionHandler())
+                .build();
     }
 
     @Test
-    public void testGetAnimal() throws Exception {
+    public void testGetAnimal() throws Exception
+    {
 
         Animal animal = new Animal();
         animal.setId(1L);
@@ -84,7 +86,8 @@ public class AnimalControllerTest
     }
 
     @Test
-    public void testGetNewAnimalForm() throws Exception {
+    public void testGetNewAnimalForm() throws Exception
+    {
         AnimalCommand command = new AnimalCommand();
 
         HashSet<CategoryOfAnimalCommand> categories = new HashSet<>();
@@ -111,9 +114,15 @@ public class AnimalControllerTest
     }
 
     @Test
-    public void testPostNewAnimalForm() throws Exception {
+    public void testPostNewAnimalForm() throws Exception
+    {
         AnimalCommand command = new AnimalCommand();
         command.setId(2L);
+        CategoryOfAnimalCommand categoryOfAnimalCommand = new CategoryOfAnimalCommand();
+        categoryOfAnimalCommand.setId(1L);
+        categoryOfAnimalCommand.setNameCategory("category");
+
+        command.setCategoryOfAnimal(categoryOfAnimalCommand);
 
         when(animalService.saveAnimalCommand(any())).thenReturn(command);
 

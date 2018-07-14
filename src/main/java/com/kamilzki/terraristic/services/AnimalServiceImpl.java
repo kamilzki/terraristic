@@ -16,7 +16,8 @@ import java.util.Set;
 
 @Slf4j
 @Service
-public class AnimalServiceImpl implements AnimalService{
+public class AnimalServiceImpl implements AnimalService
+{
 
     private final AnimalRepository animalRepository;
     private final AnimalToAnimalCommand animalToAnimalCommand;

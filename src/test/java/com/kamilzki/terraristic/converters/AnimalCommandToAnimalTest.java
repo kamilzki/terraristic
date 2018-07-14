@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 public class AnimalCommandToAnimalTest
 {
     public static final Long ANIMAL_ID = 1L;
-    public static final Integer MAX_TEMP  = 30;
+    public static final Integer MAX_TEMP = 30;
     public static final Integer MIN_TEMP = 24;
     public static final String DESCRIPTION = "description";
     public static final String NAME = "name";
@@ -32,12 +32,14 @@ public class AnimalCommandToAnimalTest
     }
 
     @Test
-    public void testNullObject() throws Exception {
+    public void testNullObject() throws Exception
+    {
         assertNull(converter.convert(null));
     }
 
     @Test
-    public void testEmptyObject() throws Exception {
+    public void testEmptyObject() throws Exception
+    {
         assertNotNull(converter.convert(new AnimalCommand()));
     }
 

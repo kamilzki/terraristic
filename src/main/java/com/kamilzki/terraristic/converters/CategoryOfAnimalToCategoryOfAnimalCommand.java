@@ -21,8 +21,10 @@ public class CategoryOfAnimalToCategoryOfAnimalCommand implements Converter<Cate
     @Synchronized
     @Nullable
     @Override
-    public CategoryOfAnimalCommand convert(CategoryOfAnimal source) {
-        if (source == null) {
+    public CategoryOfAnimalCommand convert(CategoryOfAnimal source)
+    {
+        if (source == null)
+        {
             System.out.println("null!!");
             return null;
         }
@@ -32,7 +34,8 @@ public class CategoryOfAnimalToCategoryOfAnimalCommand implements Converter<Cate
         categoryCommand.setId(source.getId());
         categoryCommand.setNameCategory(source.getNameCategory());
 
-        if (source.getAnimals() != null && source.getAnimals().size() > 0){
+        if (source.getAnimals() != null && source.getAnimals().size() > 0)
+        {
             source.getAnimals()
                     .forEach(animal -> categoryCommand.getAnimals().add(animalConverter.convert(animal)));
         }

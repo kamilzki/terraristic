@@ -55,7 +55,7 @@ public class ImageController
         {
             byte[] bytes = new byte[bytesImage.length];
 
-            int i=0;
+            int i = 0;
 
             for (Byte b : bytesImage)
             {

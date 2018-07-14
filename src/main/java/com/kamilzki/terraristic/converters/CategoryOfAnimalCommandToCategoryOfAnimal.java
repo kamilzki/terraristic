@@ -8,7 +8,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CategoryOfAnimalCommandToCategoryOfAnimal  implements Converter<CategoryOfAnimalCommand, CategoryOfAnimal>
+public class CategoryOfAnimalCommandToCategoryOfAnimal implements Converter<CategoryOfAnimalCommand, CategoryOfAnimal>
 {
 
     private final AnimalCommandToAnimal animalConverter;
@@ -21,8 +21,10 @@ public class CategoryOfAnimalCommandToCategoryOfAnimal  implements Converter<Cat
     @Synchronized
     @Nullable
     @Override
-    public CategoryOfAnimal convert(CategoryOfAnimalCommand command) {
-        if (command == null) {
+    public CategoryOfAnimal convert(CategoryOfAnimalCommand command)
+    {
+        if (command == null)
+        {
             return null;
         }
 
@@ -30,7 +32,8 @@ public class CategoryOfAnimalCommandToCategoryOfAnimal  implements Converter<Cat
         category.setId(command.getId());
         category.setNameCategory(command.getNameCategory());
 
-        if (command.getAnimals() != null && command.getAnimals().size() > 0){
+        if (command.getAnimals() != null && command.getAnimals().size() > 0)
+        {
 
             command.getAnimals()
                     .forEach(animal ->
