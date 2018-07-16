@@ -20,7 +20,7 @@ import java.util.*;
 
 @Slf4j
 @Component
-public class AnimalBootstrap implements ApplicationListener<ContextRefreshedEvent>
+public class AnimalAndUserBootstrap implements ApplicationListener<ContextRefreshedEvent>
 {
 
     private AnimalRepository animalRepository;
@@ -28,7 +28,7 @@ public class AnimalBootstrap implements ApplicationListener<ContextRefreshedEven
     private TypeOfFoodRepository foodRepository;
     private UserRepository userRepository;
 
-    public AnimalBootstrap(AnimalRepository animalRepository, CategoryOfAnimalRepository categoryRepository, TypeOfFoodRepository foodRepository, UserRepository userRepository)
+    public AnimalAndUserBootstrap(AnimalRepository animalRepository, CategoryOfAnimalRepository categoryRepository, TypeOfFoodRepository foodRepository, UserRepository userRepository)
     {
         this.animalRepository = animalRepository;
         this.categoryRepository = categoryRepository;
@@ -50,9 +50,11 @@ public class AnimalBootstrap implements ApplicationListener<ContextRefreshedEven
     {
         List<User> users = new ArrayList<>(3);
 
+        User admin = new User("admin", "admin", new String[]{"ADMIN", "USER"});
         User czarek = new User("czarek", "pieczarek", new String[]{"ADMIN", "USER"});
         User mala = new User("mala", "blondyneczka", new String[]{"USER"});
 
+        users.add(admin);
         users.add(czarek);
         users.add(mala);
 

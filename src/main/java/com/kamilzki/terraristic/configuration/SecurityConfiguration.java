@@ -23,61 +23,32 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
-    @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception
-    {
-        httpSecurity
-                .authorizeRequests().antMatchers("/","/index","/commodity/animal/{id}/show","/console/**"
-                    , "/webjars/**").permitAll()
-                .anyRequest().hasRole("ADMIN")
-                .and()
-                .formLogin().loginPage("/login").defaultSuccessUrl("/index").permitAll()
-                .and()
-                .logout().permitAll();
-
-       httpSecurity.csrf().disable();
-       httpSecurity.headers().frameOptions().disable();
-    }
-
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception
     {
-//        authenticationManagerBuilder
-//                .inMemoryAuthentication()
-////                .passwordEncoder(NoOpPasswordEncoder.getInstance())
-//                .passwordEncoder(new BCryptPasswordEncoder())
-//                .withUser("admin").password("{bcrypt}admin").roles("ADMIN")
-//                .and().withUser("user").password("{bcrypt}user").roles("USER");
         authenticationManagerBuilder
                 .userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
-
-//    @Bean
-//    @Override
-//    public UserDetailsService userDetailsService() {
-//
-//        PasswordEncoder encoder = passwordEncoder();
-//
-//        final User.UserBuilder userBuilder = User.builder().passwordEncoder(encoder::encode);
-//        UserDetails user = userBuilder
-//                .username("user")
-//                .password("user")
-//                .roles("USER")
-//                .build();
-//
-//        UserDetails admin = userBuilder
-//                .username("admin")
-//                .password("admin")
-//                .roles("USER","ADMIN")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(user, admin);
-//    }
 
     @Bean
     public PasswordEncoder passwordEncoder()
     {
         return new BCryptPasswordEncoder();
-//        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+    @Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception
+    {
+        httpSecurity
+                .authorizeRequests().antMatchers("/","/index","/commodity/animal/{id}/show","/console/**"
+                    , "/webjars/**", "/registration").permitAll()
+                .anyRequest().hasRole("ADMIN")
+                .and()
+                .formLogin().loginPage("/login").defaultSuccessUrl("/").permitAll()
+                .and()
+                .logout().permitAll();
+
+       httpSecurity.csrf().disable();
+       httpSecurity.headers().frameOptions().disable();
     }
 }

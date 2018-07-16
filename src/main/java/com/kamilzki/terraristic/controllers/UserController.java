@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,11 +20,13 @@ import java.util.Map;
 
 @Controller
 @Slf4j
-public class UserDetailsController
+public class UserController
 {
+    private final static String USER_ROLE = "USER";
+
     UserDetailsServiceImpl userDetailsService;
 
-    public UserDetailsController(UserDetailsServiceImpl userDetailsService)
+    public UserController(UserDetailsServiceImpl userDetailsService)
     {
         this.userDetailsService = userDetailsService;
     }
@@ -44,15 +47,18 @@ public class UserDetailsController
     }
 
     @GetMapping("/registration")
-    public String registration()
+    public String registration(Model model)
     {
         log.debug("get - registration");
+
+        UserCommand userCommand = new UserCommand();
+        model.addAttribute("user", userCommand);
 
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String registration(@Valid @ModelAttribute("account")UserCommand userCommand, BindingResult bindingResult)
+    public String registration(@Valid @ModelAttribute("user")UserCommand userCommand, BindingResult bindingResult)
     {
         log.debug("get - registration");
 
@@ -67,8 +73,11 @@ public class UserDetailsController
             return "registration";
         }
 
+        userCommand.setRoles(new String[]{USER_ROLE});
         UserCommand savedUserCommand = userDetailsService.saveUserCommand(userCommand);
 
-        return "registration";
+        log.debug("Create user: " + savedUserCommand.getId() + ", " + savedUserCommand.getUsername()
+                + ", " + savedUserCommand.getPassword() + ", " + savedUserCommand.getRoles());
+        return "redirect:/login";
     }
 }
