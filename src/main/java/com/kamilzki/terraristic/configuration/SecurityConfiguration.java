@@ -1,5 +1,6 @@
 package com.kamilzki.terraristic.configuration;
 
+import com.kamilzki.terraristic.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,9 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    UserDetailsServiceImpl userDetailsService;
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception
     {
@@ -34,38 +38,46 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
        httpSecurity.csrf().disable();
        httpSecurity.headers().frameOptions().disable();
     }
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception
-//    {
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception
+    {
 //        authenticationManagerBuilder
 //                .inMemoryAuthentication()
 ////                .passwordEncoder(NoOpPasswordEncoder.getInstance())
 //                .passwordEncoder(new BCryptPasswordEncoder())
 //                .withUser("admin").password("{bcrypt}admin").roles("ADMIN")
 //                .and().withUser("user").password("{bcrypt}user").roles("USER");
+        authenticationManagerBuilder
+                .userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
+
+//    @Bean
+//    @Override
+//    public UserDetailsService userDetailsService() {
 //
+//        PasswordEncoder encoder = passwordEncoder();
+//
+//        final User.UserBuilder userBuilder = User.builder().passwordEncoder(encoder::encode);
+//        UserDetails user = userBuilder
+//                .username("user")
+//                .password("user")
+//                .roles("USER")
+//                .build();
+//
+//        UserDetails admin = userBuilder
+//                .username("admin")
+//                .password("admin")
+//                .roles("USER","ADMIN")
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(user, admin);
 //    }
 
     @Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-
-        final User.UserBuilder userBuilder = User.builder().passwordEncoder(encoder::encode);
-        UserDetails user = userBuilder
-                .username("user")
-                .password("user")
-                .roles("USER")
-                .build();
-
-        UserDetails admin = userBuilder
-                .username("admin")
-                .password("admin")
-                .roles("USER","ADMIN")
-                .build();
-
-        return new InMemoryUserDetailsManager(user, admin);
+    public PasswordEncoder passwordEncoder()
+    {
+        return new BCryptPasswordEncoder();
+//        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
-
 }

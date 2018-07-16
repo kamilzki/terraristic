@@ -36,12 +36,4 @@ public class IndexController
         model.addAttribute("animals", animalService.getAnimals());
         return "index";
     }
-
-    @GetMapping(value = "/login")
-    public String login(){
-        log.debug("Go to /login");
-        return "login";
-    }
-
-
 }
