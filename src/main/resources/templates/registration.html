@@ -36,14 +36,14 @@
             <tr th:class="${#fields.hasErrors('username')}">
                 <td><label> Username: <input type="text" name="username"/>
                     <ul>
-                        <li th:each="err : ${#fields.errors('username')}" th:text="${err}"/>
+                        <li th:each="err : ${#fields.errors('username')}" th:text="${err}" style="color: red"/>
                     </ul>
                 </label></td>
             </tr>
             <tr th:class="${#fields.hasErrors('password')}">
                 <td><label> Password: <input type="password" name="password"/>
                     <ul>
-                        <li th:each="err : ${#fields.errors('password')}" th:text="${err}"/>
+                        <li th:each="err : ${#fields.errors('password')}" th:text="${err}" style="color: red"/>
                     </ul>
                 </label></td>
 

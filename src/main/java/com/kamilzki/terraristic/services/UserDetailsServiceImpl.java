@@ -4,6 +4,7 @@ import com.kamilzki.terraristic.commands.UserCommand;
 import com.kamilzki.terraristic.converters.UserCommandToUser;
 import com.kamilzki.terraristic.converters.UserToUserCommand;
 import com.kamilzki.terraristic.domain.User;
+import com.kamilzki.terraristic.exceptions.UserExistsException;
 import com.kamilzki.terraristic.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -57,6 +58,12 @@ public class UserDetailsServiceImpl implements UserDetailsService
 
     public UserCommand saveUserCommand(UserCommand userCommand)
     {
+        Optional<User> optionalUserCommand = userRepository.findByUsername(userCommand.getUsername());
+        if (optionalUserCommand.isPresent())
+        {
+            throw new UserExistsException("User with this name is already exists: " + userCommand.getUsername());
+        }
+
         User user = userCommandToUser.convert(userCommand);
         userRepository.save(user);
 

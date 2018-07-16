@@ -1,16 +1,13 @@
 package com.kamilzki.terraristic.controllers;
 
-import com.kamilzki.terraristic.commands.AnimalCommand;
 import com.kamilzki.terraristic.commands.UserCommand;
+import com.kamilzki.terraristic.exceptions.UserExistsException;
 import com.kamilzki.terraristic.services.UserDetailsServiceImpl;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -74,7 +71,20 @@ public class UserController
         }
 
         userCommand.setRoles(new String[]{USER_ROLE});
-        UserCommand savedUserCommand = userDetailsService.saveUserCommand(userCommand);
+
+        UserCommand savedUserCommand;
+        try
+        {
+            savedUserCommand = userDetailsService.saveUserCommand(userCommand);
+        }
+        catch (UserExistsException e)
+        {
+            FieldError error = new FieldError("userName",
+                    "username", e.getMessage());
+            bindingResult.addError(error);
+
+            return "registration";
+        }
 
         log.debug("Create user: " + savedUserCommand.getId() + ", " + savedUserCommand.getUsername()
                 + ", " + savedUserCommand.getPassword() + ", " + savedUserCommand.getRoles());
