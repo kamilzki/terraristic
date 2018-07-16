@@ -3,9 +3,11 @@ package com.kamilzki.terraristic.bootstrap;
 import com.kamilzki.terraristic.domain.Animal;
 import com.kamilzki.terraristic.domain.CategoryOfAnimal;
 import com.kamilzki.terraristic.domain.TypeOfFood;
+import com.kamilzki.terraristic.domain.User;
 import com.kamilzki.terraristic.repositories.AnimalRepository;
 import com.kamilzki.terraristic.repositories.CategoryOfAnimalRepository;
 import com.kamilzki.terraristic.repositories.TypeOfFoodRepository;
+import com.kamilzki.terraristic.repositories.UserRepository;
 import com.sun.deploy.security.ValidationState;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
@@ -18,18 +20,20 @@ import java.util.*;
 
 @Slf4j
 @Component
-public class AnimalBootstrap implements ApplicationListener<ContextRefreshedEvent>
+public class AnimalAndUserBootstrap implements ApplicationListener<ContextRefreshedEvent>
 {
 
     private AnimalRepository animalRepository;
     private CategoryOfAnimalRepository categoryRepository;
     private TypeOfFoodRepository foodRepository;
+    private UserRepository userRepository;
 
-    public AnimalBootstrap(AnimalRepository animalRepository, CategoryOfAnimalRepository categoryRepository, TypeOfFoodRepository foodRepository)
+    public AnimalAndUserBootstrap(AnimalRepository animalRepository, CategoryOfAnimalRepository categoryRepository, TypeOfFoodRepository foodRepository, UserRepository userRepository)
     {
         this.animalRepository = animalRepository;
         this.categoryRepository = categoryRepository;
         this.foodRepository = foodRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -38,6 +42,23 @@ public class AnimalBootstrap implements ApplicationListener<ContextRefreshedEven
     {
         animalRepository.saveAll(getAnimals());
         log.debug("Loading templates.animal bootstrap data.");
+
+        userRepository.saveAll(getUsers());
+    }
+
+    private List<User> getUsers()
+    {
+        List<User> users = new ArrayList<>(3);
+
+        User admin = new User("admin", "admin", new String[]{"ADMIN", "USER"});
+        User czarek = new User("czarek", "pieczarek", new String[]{"ADMIN", "USER"});
+        User mala = new User("mala", "blondyneczka", new String[]{"USER"});
+
+        users.add(admin);
+        users.add(czarek);
+        users.add(mala);
+
+        return users;
     }
 
     private List<Animal> getAnimals() {

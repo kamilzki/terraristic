@@ -2,6 +2,7 @@ package com.kamilzki.terraristic.controllers;
 
 import com.kamilzki.terraristic.commands.AnimalCommand;
 import com.kamilzki.terraristic.commands.CategoryOfAnimalCommand;
+import com.kamilzki.terraristic.domain.Animal;
 import com.kamilzki.terraristic.exceptions.NotFoundException;
 import com.kamilzki.terraristic.services.AnimalService;
 import com.kamilzki.terraristic.services.CategoryOfAnimalService;
@@ -56,7 +57,6 @@ public class AnimalController
 
         model.addAttribute("allCategories", categoryOfAnimalService.listAllCategory());
         model.addAttribute("allTypeOfFoods", typeOfFoodService.listAllTypeOfFoods());
-
         return COMMODITY_ANIMAL_ANIMALFORM;
     }
 
