@@ -23,18 +23,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     private UserDetailsServiceImpl userDetailsService;
 
     @Bean
-    public UserValidator userValidator()
-    {
-        return new UserValidator();
-    }
-
-    @Bean
-    public UserDetailsServiceImpl userDetailsService()
-    {
-        return new UserDetailsServiceImpl();
-    }
-
-    @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder()
     {
         return new BCryptPasswordEncoder();
