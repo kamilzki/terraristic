@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <title>Animals</title>
@@ -23,6 +23,11 @@
 
     <!--/*@thymesVar id="animals" type="java.util.List"*/-->
     <!--/*@thymesVar id="animal" type="com.kamilzki.terraristic.domain.Animal"*/-->
+    <div class="welcome">
+        <span sec:authorize="isAuthenticated()">Welcome <span sec:authentication="name"></span></span>
+        <span sec:authorize="!isAuthenticated()">Welcome Guest</span>
+
+    </div>
     <div class="container-fluid" style="margin-top: 25px">
         <div class="row">
             <div class="col-md-5 col-md-offset-3">
@@ -37,10 +42,10 @@
                                 <thead class="thead-inverse">
                                 <tr>
                                     <th>Name</th>
-                                    <th>Cena</th>
+                                    <th>Price</th>
                                     <th>View</th>
-                                    <th>Update</th>
-                                    <th>Delete</th>
+                                    <th sec:authorize="hasAuthority('ADMIN')">Update</th>
+                                    <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
                                 </tr>
                                 </thead>
                                 <tr th:remove="all">
@@ -55,14 +60,15 @@
                                     <td th:text="${animal.price + ' zł'}">210 zł</td>
                                     <td><a href="#" th:href="@{'/commodity/animal/' + ${animal.id} + '/show'}">View</a>
                                     </td>
-                                    <td><a href="#"
+                                    <td sec:authorize="hasAuthority('ADMIN')"><a href="#"
                                            th:href="@{'/commodity/animal/' + ${animal.id} + '/update'}">Update</a></td>
-                                    <td><a href="#"
+                                    <td sec:authorize="hasAuthority('ADMIN')"><a href="#"
                                            th:href="@{'/commodity/animal/' + ${animal.id} + '/delete'}">Delete</a></td>
                                 </tr>
                             </table>
                         </div>
-                        <a class="btn btn-primary" th:href="@{'/commodity/animal/new'}" role="button">Add</a>
+                        <a sec:authorize="hasAuthority('ADMIN')"
+                           class="btn btn-primary" th:href="@{'/commodity/animal/new'}" role="button">Add</a>
                     </div>
                 </div>
             </div>

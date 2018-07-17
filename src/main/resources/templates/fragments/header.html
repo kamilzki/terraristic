@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head lang="en">
 </head>
 <body>
@@ -8,11 +8,16 @@
     <div th:fragment="header">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#" th:href="@{/}">Home</a>
-                <ul class="nav navbar-nav">
-                    <li><a href="#" th:href="@{/}">Animals</a></li>
-                    <li><a href="#" th:href="@{/commodity/animal/new}">Create animal</a></li>
-                </ul>
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#" th:href="@{/}" style="color:dodgerblue; font-size:28px">Home</a>
+                    <ul class="nav navbar-nav">
+                        <li><a href="#" th:href="@{/}">Animals</a></li>
+                        <li><a sec:authorize="hasAuthority('ADMIN')" href="#" th:href="@{/commodity/animal/new}">Create animal</a></li>
+                        <li><a sec:authorize="!isAuthenticated()" href="#" th:href="@{/login}">Sign In</a></li>
+                        <li><a sec:authorize="!isAuthenticated()" href="#" th:href="@{/registration}" style="color: darkblue">Sign Up</a></li>
+                        <li><a sec:authorize="isAuthenticated()" href="#" th:href="@{/logout}" style="color:chocolate">Sign Out</a></li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </div>
