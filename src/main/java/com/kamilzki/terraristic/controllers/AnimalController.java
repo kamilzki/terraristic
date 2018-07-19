@@ -22,6 +22,7 @@ import java.util.Map;
 public class AnimalController
 {
     private static final String COMMODITY_ANIMAL_ANIMALFORM = "commodity/animal/animalform";
+    private static final String COMMODITY_ANIMAL = "/commodity/animal";
 
     private final AnimalService animalService;
     private final CategoryOfAnimalService categoryOfAnimalService;
@@ -34,17 +35,15 @@ public class AnimalController
         this.typeOfFoodService = typeOfFoodService;
     }
 
-    @GetMapping //good habit
-    @RequestMapping("/commodity/animal/{id}/show")
+    @GetMapping(COMMODITY_ANIMAL + "/{id}/show")
     public String showById(@PathVariable String id, Model model)
     {
         model.addAttribute("animal", animalService.findById(new Long(id)));
 
-        return "commodity/animal/show";
+        return COMMODITY_ANIMAL + "/show";
     }
 
-    @GetMapping
-    @RequestMapping("commodity/animal/new")
+    @GetMapping(COMMODITY_ANIMAL + "/new")
     public String newAnimal(Model model)
     {
         log.debug("get - new Animal");
@@ -60,8 +59,7 @@ public class AnimalController
         return COMMODITY_ANIMAL_ANIMALFORM;
     }
 
-    @GetMapping
-    @RequestMapping("commodity/animal/{id}/update")
+    @GetMapping(COMMODITY_ANIMAL + "/{id}/update")
     public String updateAnimal(@PathVariable String id, Model model)
     {
         log.debug("get - update Animal");
@@ -77,7 +75,7 @@ public class AnimalController
         return COMMODITY_ANIMAL_ANIMALFORM;
     }
 
-    @PostMapping("commodity/animal")
+    @PostMapping(COMMODITY_ANIMAL)
     public String saveOrUpdate(@Valid @ModelAttribute("animal") AnimalCommand command, BindingResult bindingResult)
     {
         log.debug("post - saveOrUpdate");
@@ -95,11 +93,10 @@ public class AnimalController
         AnimalCommand savedCommand = animalService.saveAnimalCommand(command);
 
 
-        return "redirect:/commodity/animal/" + savedCommand.getId() + "/show";
+        return "redirect:" + COMMODITY_ANIMAL + "/" + savedCommand.getId() + "/show";
     }
 
-    @GetMapping
-    @RequestMapping("commodity/animal/{id}/delete")
+    @GetMapping(COMMODITY_ANIMAL + "/{id}/delete")
     public String deleteAnimal(@PathVariable String id, Model model)
     {
         log.debug("Delete animal id=" + id);

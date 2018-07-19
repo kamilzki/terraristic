@@ -4,41 +4,46 @@ import com.kamilzki.terraristic.domain.User;
 import com.kamilzki.terraristic.services.SecurityService;
 import com.kamilzki.terraristic.services.UserService;
 import com.kamilzki.terraristic.validator.UserValidator;
+import com.sun.org.apache.regexp.internal.RE;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @Controller
 @Slf4j
 public class UserController {
-    @Autowired
-    private UserService userService;
+
+    private static final String REGISTRATION = "/registration";
+
+    private final UserService userService;
+    private final SecurityService securityService;
+    private final UserValidator userValidator;
 
     @Autowired
-    private SecurityService securityService;
+    public UserController(UserService userService, SecurityService securityService, UserValidator userValidator)
+    {
+        this.userService = userService;
+        this.securityService = securityService;
+        this.userValidator = userValidator;
+    }
 
-    @Autowired
-    private UserValidator userValidator;
-
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    @GetMapping(value = REGISTRATION)
     public String registration(Model model) {
         model.addAttribute("user", new User());
 
-        return "registration";
+        return REGISTRATION;
     }
 
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    @PostMapping(value = REGISTRATION)
     public String registration(@ModelAttribute("user") User user, BindingResult bindingResult) {
         userValidator.validate(user, bindingResult);
 
-        log.debug("post - registration");
+        log.debug("post - " + REGISTRATION);
 
         if (bindingResult.hasErrors())
         {
@@ -48,7 +53,7 @@ public class UserController {
             });
             Map<String, Object> model = bindingResult.getModel();
 
-            return "registration";
+            return REGISTRATION;
         }
 
         userService.saveUser(user);
@@ -58,7 +63,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @GetMapping(value = "/login")
     public String login(Model model, String error, String logout) {
         return "login";
     }

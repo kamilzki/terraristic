@@ -20,6 +20,9 @@ import java.io.InputStream;
 @Controller
 public class ImageController
 {
+    private static final String COMMODITY_ANIMAL_ID = "/commodity/animal/{id}";
+    private static final String COMMODITY_ANIMAL = "/commodity/animal";
+
     private final ImageService imageService;
     private final AnimalService animalService;
 
@@ -29,23 +32,23 @@ public class ImageController
         this.animalService = animalService;
     }
 
-    @GetMapping("commodity/animal/{id}/image")
+    @GetMapping(COMMODITY_ANIMAL_ID + "/image")
     public String showUploadForm(@PathVariable String id, Model model)
     {
         model.addAttribute("animal", animalService.findCommandById(Long.valueOf(id)));
 
-        return "commodity/animal/imageuploadform";
+        return COMMODITY_ANIMAL + "/imageuploadform";
     }
 
-    @PostMapping("commodity/animal/{id}/image")
+    @PostMapping(COMMODITY_ANIMAL_ID + "/image")
     public String handleImagePost(@PathVariable String id, @RequestParam("imagefile") MultipartFile file)
     {
         imageService.saveImageFile(Long.valueOf(id), file);
 
-        return "redirect:/commodity/animal/" + id + "/show";
+        return "redirect:" + COMMODITY_ANIMAL + id + "/show";
     }
 
-    @GetMapping("commodity/animal/{id}/animalimage")
+    @GetMapping(COMMODITY_ANIMAL_ID + "/animalimage")
     public void renderImageFromDB(@PathVariable String id, HttpServletResponse response) throws IOException
     {
         AnimalCommand animalCommand = animalService.findCommandById(Long.valueOf(id));
